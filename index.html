@@ -52,7 +52,7 @@
   /* ---------- Viewport / stage scaffolding ---------- */
   .deck-viewport{
     width:100%;
-    height:100dvh;
+    height:calc(100dvh - 54px);
     min-height:520px;
     display:flex;
     align-items:center;
@@ -588,6 +588,7 @@
     }
 
     /* 全部展開，取消絕對定位與淡入 */
+    .slide{ scroll-margin-top:58px; }
     .slide,
     .slide.is-active,
     .slide.is-active.p-strategy,
@@ -673,15 +674,94 @@
     /* 手機用捲動瀏覽，隱藏翻頁列 */
     .nav{ display:none !important; }
   }
+
+  /* ---------- 章節導覽列（頁面最上方，可點選跳章）---------- */
+  .chapter-bar{
+    position:sticky; top:0; z-index:60;
+    background:rgba(15,43,41,.92);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid rgba(180,154,104,.28);
+  }
+  .chapter-inner{
+    max-width:1340px; margin:0 auto;
+    display:flex; align-items:center; gap:14px;
+    padding:11px 20px;
+  }
+  .chapter-brand{
+    font-family:'Noto Serif TC',serif; font-weight:700; font-size:14px;
+    color:var(--ivory); white-space:nowrap; flex:none;
+    padding-right:14px; border-right:1px solid rgba(244,240,232,.22);
+    letter-spacing:.02em;
+  }
+  .chapter-scroll{
+    display:flex; gap:7px; overflow-x:auto; scrollbar-width:thin;
+    scroll-behavior:smooth; padding:2px 0;
+  }
+  .chapter-scroll::-webkit-scrollbar{ height:4px; }
+  .chapter-scroll::-webkit-scrollbar-thumb{ background:rgba(180,154,104,.4); border-radius:4px; }
+  .chip-ch{
+    flex:none; cursor:pointer;
+    font-family:'Noto Sans TC',sans-serif; font-size:12px; font-weight:500;
+    color:rgba(244,240,232,.72);
+    background:transparent;
+    border:1px solid rgba(244,240,232,.22);
+    border-radius:20px; padding:6px 14px;
+    white-space:nowrap; letter-spacing:.02em;
+    transition:color .15s ease, border-color .15s ease, background .15s ease;
+  }
+  .chip-ch:hover{ color:var(--ivory); border-color:rgba(180,154,104,.65); }
+  .chip-ch:focus-visible{ outline:2px solid var(--gold); outline-offset:2px; }
+  .chip-ch .n{
+    font-family:'Inter',sans-serif; font-variant-numeric:tabular-nums;
+    font-size:10.5px; color:var(--gold); margin-right:6px; font-weight:700;
+  }
+  .chip-ch[aria-current="true"]{
+    color:var(--night); background:var(--gold); border-color:var(--gold); font-weight:600;
+  }
+  .chip-ch[aria-current="true"] .n{ color:var(--night); opacity:.65; }
+
+  @media (max-width: 900px){
+    .chapter-inner{ padding:9px 14px; gap:10px; }
+    .chapter-brand{ font-size:13px; padding-right:10px; }
+    .chip-ch{ font-size:12px; padding:7px 13px; }
+    .deck-viewport{ padding-top:0; }
+  }
+  @media print{ .chapter-bar{ display:none; } }
+
+  /* 國外案例頁：三欄 */
+  .intl-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-top:22px; }
+  .intl-card{ border:1px solid rgba(23,61,58,.14); background:var(--white); display:flex; flex-direction:column; }
+  .intl-head{ height:84px; position:relative; display:flex; align-items:flex-end; }
+  .intl-head .ih-name{ position:relative; z-index:2; font-family:'Noto Serif TC',serif; font-weight:700;
+    font-size:15px; color:var(--ivory); padding:13px 16px; line-height:1.35; }
+  .intl-head .ih-flag{ position:absolute; top:11px; right:13px; z-index:3;
+    font-family:'Inter',sans-serif; font-size:9px; letter-spacing:.1em; text-transform:uppercase;
+    color:var(--ivory); border:1px solid rgba(244,240,232,.45); padding:3px 7px; }
+  .intl-body{ padding:14px 16px 16px; flex:1; display:flex; flex-direction:column; }
+  .intl-body .ib-who{ font-size:11px; color:var(--pond); font-weight:600; line-height:1.5; margin:0 0 8px; }
+  .intl-body p{ font-size:11.5px; line-height:1.7; color:var(--ink); margin:0; flex:1; }
+  .intl-body .ib-stat{ margin-top:10px; font-family:'Inter',sans-serif; font-size:10px; color:var(--mist);
+    font-variant-numeric:tabular-nums; border-top:1px solid rgba(23,61,58,.12); padding-top:8px; }
+  @media (max-width: 900px){
+    .intl-grid{ grid-template-columns:1fr !important; gap:12px !important; }
+    .intl-head{ height:64px; }
+  }
 </style>
 </head>
 <body>
+<nav class="chapter-bar" aria-label="章節導覽">
+  <div class="chapter-inner">
+    <span class="chapter-brand">款待一座城</span>
+    <div class="chapter-scroll" id="chapterScroll"></div>
+  </div>
+</nav>
+
 <div class="deck-viewport" id="viewport">
   <div class="stage-wrap" id="stageWrap">
     <div class="stage" id="stage">
 
       <!-- ============ PAGE 1 — 封面 ============ -->
-      <section class="slide is-active p-cover" data-title="封面">
+      <section class="slide is-active p-cover" data-title="封面" data-nav="封面">
         <div class="photo-zone">
           <span class="photo-tag">Monarch Hotels Group · Taoyuan</span>
           <div class="arch"></div>
@@ -699,11 +779,11 @@
           提案對象　<b>簡歆瑜 Annie</b><br>
           企劃　Winnie ｜ 提案日期　2026.08
         </div>
-        <div class="page-index"><b>01</b> / 15</div>
+        <div class="page-index"><b>01</b> / 16</div>
       </section>
 
       <!-- ============ PAGE 2 — 為什麼與 SDH 合作 ============ -->
-      <section class="slide" data-title="為什麼與 SDH 合作">
+      <section class="slide" data-title="為什麼與 SDH 合作" data-nav="為什麼是 SDH">
         <div class="pad">
           <span class="eyebrow">01 — Why SDH</span>
           <h1 class="title">為什麼與 SDH 盛德好合作</h1>
@@ -740,11 +820,11 @@
             </div>
           </div>
         </div>
-        <div class="page-index"><b>02</b> / 15</div>
+        <div class="page-index"><b>02</b> / 16</div>
       </section>
 
       <!-- ============ PAGE 3 — 市場與品牌機會 ============ -->
-      <section class="slide p-strategy" data-title="市場與品牌機會">
+      <section class="slide p-strategy" data-title="市場與品牌機會" data-nav="市場機會">
         <div class="left">
           <span class="eyebrow">02 — The Opening</span>
           <h1 class="title">市場與品牌機會</h1>
@@ -764,11 +844,11 @@
             <div class="visual-caption">飯店客房或公共空間一隅的靜態人物剪影，搭配窗景自然光，不使用麥克風特寫。</div>
           </div>
         </div>
-        <div class="page-index"><b>03</b> / 15</div>
+        <div class="page-index"><b>03</b> / 16</div>
       </section>
 
       <!-- ============ PAGE 4 — 三層架構 ============ -->
-      <section class="slide p-frame" data-title="BOSS IP × 飯店品牌 × 桃園城市內容">
+      <section class="slide p-frame" data-title="BOSS IP × 飯店品牌 × 桃園城市內容" data-nav="三層架構">
         <div class="pad">
           <span class="eyebrow">03 — The Framework</span>
           <h1 class="title">BOSS IP × 飯店品牌 × 桃園城市內容</h1>
@@ -788,11 +868,11 @@
             </div>
           </div>
         </div>
-        <div class="page-index"><b>04</b> / 15</div>
+        <div class="page-index"><b>04</b> / 16</div>
       </section>
 
       <!-- ============ PAGE 5 — 為什麼是 Annie ============ -->
-      <section class="slide p-annie" data-title="為什麼是 Annie">
+      <section class="slide p-annie" data-title="為什麼是 Annie" data-nav="為什麼是 Annie">
         <div class="left">
           <div class="visual-block tex-c" style="height:100%;">
             <span class="visual-tag">建議視覺</span>
@@ -814,11 +894,11 @@
             <div class="trait">適合成為旅宿經營者、女性領導者與桃園城市內容策展人</div>
           </div>
         </div>
-        <div class="page-index"><b>05</b> / 15</div>
+        <div class="page-index"><b>05</b> / 16</div>
       </section>
 
       <!-- ============ PAGE 6 — 老闆 IP 做 Podcast ============ -->
-      <section class="slide" data-title="老闆親自開口：已被驗證的模式">
+      <section class="slide" data-title="老闆親自開口：已被驗證的模式" data-nav="老闆 IP 案例">
         <div class="pad" style="padding:52px 72px;">
           <span class="eyebrow">05 — Proven Model</span>
           <h1 class="title" style="font-size:36px;">老闆親自開口，是已經被驗證的模式</h1>
@@ -863,13 +943,52 @@
             <b>這對三館的意義：</b>台灣聽眾最常收聽的兩個主場——<b>財經商業</b>與<b>旅遊資訊</b>——正好交會在「旅宿經營者」這個身分上。Annie 站上這個位置，不是跟風，是先行。
           </div>
         </div>
-        <div class="page-index"><b>06</b> / 15</div>
+        <div class="page-index"><b>06</b> / 16</div>
+      </section>
+
+      <!-- ============ PAGE 7 — 國外精品／獨立旅宿案例 ============ -->
+      <section class="slide" data-title="國外精品旅宿的三種做法" data-nav="國外旅宿案例">
+        <div class="pad" style="padding:52px 72px;">
+          <span class="eyebrow">06 — International</span>
+          <h1 class="title" style="font-size:34px;">國外精品旅宿，已經做出三種內容路線</h1>
+          <p class="thesis" style="font-size:17px;max-width:790px;">產業媒體做、平台方做、業主自己做——三條路都有人走。而「業主親自坐上主持位」的，目前多是小型精品旅館。</p>
+          <div class="intl-grid">
+            <div class="intl-card">
+              <div class="intl-head tex-b"><span class="ih-flag">UK · 產業媒體</span><div class="ih-name">Checking In<br>by Hotel Owner</div></div>
+              <div class="intl-body">
+                <div class="ib-who">英國旅宿業媒體 Hotel Owner<br>（Mulberry Media）製作</div>
+                <p>定位為「為旅宿經營者與從業人員打造」，來賓橫跨產業專家、創業者與新進者，包含精品旅宿共同創辦人與旅宿集團高管。</p>
+                <div class="ib-stat">週更 · 已 138 集</div>
+              </div>
+            </div>
+            <div class="intl-card">
+              <div class="intl-head tex-a"><span class="ih-flag">US · 平台方</span><div class="ih-name">Behind<br>the Stays</div></div>
+              <div class="intl-body">
+                <div class="ib-who">Zach Busekrus<br>Journey 主管、StayWatch 創辦人</div>
+                <p>專講精品旅宿、短租物件與款待品牌背後的「經營者本人」故事——把旅宿的幕後主事者當成內容主角。</p>
+                <div class="ib-stat">每週二、五雙更 · 已 376 集 · Listen Notes 全球前 1.5%</div>
+              </div>
+            </div>
+            <div class="intl-card">
+              <div class="intl-head tex-d"><span class="ih-flag">US · 業主親自主持</span><div class="ih-name">Inn the Wild</div></div>
+              <div class="intl-body">
+                <div class="ib-who">Laurie &amp; Jason Stuehmer<br>Cape Cod 精品旅館 Captain Freeman Inn 業主</div>
+                <p>官方定位逐字為「經營一間 Cape Cod 精品旅館的幕後」。業主夫婦親自開口，把自家旅宿的日常變成節目。</p>
+                <div class="ib-stat">週更 · 已 48 集</div>
+              </div>
+            </div>
+          </div>
+          <div class="insight-box" style="margin-top:16px;margin-right:96px;padding:15px 24px;font-size:12.5px;">
+            <b>缺的那一格：</b>業主親自主持的案例，目前集中在<b>小型精品旅館</b>；而產業媒體與平台方做的節目，主持人並非旅宿經營者本人。<b>由五星級飯店集團經營者具名主持</b>的城市內容節目，國際上稀有，台灣尚未出現。
+          </div>
+        </div>
+        <div class="page-index"><b>07</b> / 16</div>
       </section>
 
       <!-- ============ PAGE 6 — 三館內容角色 ============ -->
-      <section class="slide p-props" data-title="三館內容角色">
+      <section class="slide p-props" data-title="三館內容角色" data-nav="三館角色">
         <div class="pad">
-          <span class="eyebrow">06 — The Properties</span>
+          <span class="eyebrow">07 — The Properties</span>
           <h1 class="title">三館內容角色</h1>
           <p class="thesis">三館在節目裡各自扮演不同的城市敘事者，彼此互補、不重疊。</p>
           <div class="prop-grid">
@@ -908,13 +1027,13 @@
             </div>
           </div>
         </div>
-        <div class="page-index"><b>07</b> / 15</div>
+        <div class="page-index"><b>08</b> / 16</div>
       </section>
 
       <!-- ============ PAGE 7 — 市場案例與缺口 ============ -->
-      <section class="slide" data-title="台灣市場案例與市場缺口">
+      <section class="slide" data-title="台灣市場案例與市場缺口" data-nav="市場缺口">
         <div class="pad">
-          <span class="eyebrow">07 — The Gap</span>
+          <span class="eyebrow">08 — The Gap</span>
           <h1 class="title">台灣市場案例與市場缺口</h1>
           <p class="thesis">現有節目說的是「飯店幕後」與「職人生涯」，還沒有人用「經營者視角」長期談一座城市。</p>
           <div class="case-grid">
@@ -937,13 +1056,13 @@
             <b>市場缺口：</b>台灣旅宿內容目前分兩類——品牌官方製作的幕後節目，以及從業者的職涯分享。<b>由旅宿經營者本人具名主持</b>，以飯店為觀景台長期談城市、文化、服務、美學與企業經營的節目，尚未出現。這正是《款待一座城》要站上的位置。
           </div>
         </div>
-        <div class="page-index"><b>08</b> / 15</div>
+        <div class="page-index"><b>09</b> / 16</div>
       </section>
 
       <!-- ============ PAGE 8 — 節目定位及受眾 ============ -->
-      <section class="slide p-strategy" data-title="節目定位及受眾">
+      <section class="slide p-strategy" data-title="節目定位及受眾" data-nav="定位與受眾">
         <div class="left">
-          <span class="eyebrow">08 — Positioning</span>
+          <span class="eyebrow">09 — Positioning</span>
           <h1 class="title">節目定位及受眾</h1>
           <p class="thesis">由旅宿經營者出發，邀請城市裡值得認識的人，一起聊服務、生活、美學與桃園的下一種可能。</p>
           <div class="body-copy" style="margin-top:22px;">
@@ -964,13 +1083,13 @@
             <div class="visual-caption">Annie 與來賓於飯店公共空間對談的自然抓拍，呈現對話感而非錄音室感。</div>
           </div>
         </div>
-        <div class="page-index"><b>09</b> / 15</div>
+        <div class="page-index"><b>10</b> / 16</div>
       </section>
 
       <!-- ============ PAGE 9 — 節目名稱方向 ============ -->
-      <section class="slide" data-title="節目名稱方向">
+      <section class="slide" data-title="節目名稱方向" data-nav="節目名稱">
         <div class="pad">
-          <span class="eyebrow">09 — The Name</span>
+          <span class="eyebrow">10 — The Name</span>
           <h1 class="title">節目名稱方向</h1>
           <p class="thesis">《款待一座城》作為本次提案暫定名，精準濃縮核心主張；正式名稱將於合作確認後共同定案。</p>
           <div class="name-grid">
@@ -994,13 +1113,13 @@
             </div>
           </div>
         </div>
-        <div class="page-index"><b>10</b> / 15</div>
+        <div class="page-index"><b>11</b> / 16</div>
       </section>
 
       <!-- ============ PAGE 10 — 五大內容支柱 ============ -->
-      <section class="slide" data-title="五大內容支柱">
+      <section class="slide" data-title="五大內容支柱" data-nav="內容支柱">
         <div class="pad">
-          <span class="eyebrow">10 — Content Pillars</span>
+          <span class="eyebrow">11 — Content Pillars</span>
           <h1 class="title">五大內容支柱</h1>
           <p class="thesis">五根支柱各自對應人物、品牌、城市三層，確保長期選題源源不絕。</p>
           <div class="pillar-grid">
@@ -1031,13 +1150,13 @@
             </div>
           </div>
         </div>
-        <div class="page-index"><b>11</b> / 15</div>
+        <div class="page-index"><b>12</b> / 16</div>
       </section>
 
       <!-- ============ PAGE 11 — 先導季規劃 ============ -->
-      <section class="slide" data-title="先導季6集規劃">
+      <section class="slide" data-title="先導季6集規劃" data-nav="先導季規劃">
         <div class="pad">
-          <span class="eyebrow">11 — Pilot Season</span>
+          <span class="eyebrow">12 — Pilot Season</span>
           <h1 class="title">先導季 6 集規劃</h1>
           <p class="thesis">6 集、雙週更新、每集 30–40 分鐘，從「為什麼開這個節目」出發，逐集展開品牌、城市、飲食與未來命題。</p>
           <div class="timeline">
@@ -1085,13 +1204,13 @@
             </div>
           </div>
         </div>
-        <div class="page-index"><b>12</b> / 15</div>
+        <div class="page-index"><b>13</b> / 16</div>
       </section>
 
       <!-- ============ PAGE 12 — 內容擴散與商業價值 ============ -->
-      <section class="slide" data-title="內容擴散與商業價值">
+      <section class="slide" data-title="內容擴散與商業價值" data-nav="擴散與價值">
         <div class="pad">
-          <span class="eyebrow">12 — Value</span>
+          <span class="eyebrow">13 — Value</span>
           <h1 class="title">內容擴散與商業價值</h1>
           <p class="thesis">一次錄製，長成音頻、長影片、SEO 長文與短影音四種資產——同時服務品牌信任、搜尋能見度與城市曝光。</p>
           <div class="flow-row">
@@ -1114,13 +1233,13 @@
             </ul>
           </div>
         </div>
-        <div class="page-index"><b>13</b> / 15</div>
+        <div class="page-index"><b>14</b> / 16</div>
       </section>
 
       <!-- ============ PAGE 13 — 合作製作範圍 ============ -->
-      <section class="slide" data-title="合作製作範圍">
+      <section class="slide" data-title="合作製作範圍" data-nav="合作範圍">
         <div class="pad">
-          <span class="eyebrow">13 — Scope</span>
+          <span class="eyebrow">14 — Scope</span>
           <h1 class="title">合作製作範圍（提案階段）</h1>
           <p class="thesis">這是提案階段的建議分工，細節與週期將於雙方確認合作後共同訂定。</p>
           <div class="scope-list">
@@ -1154,13 +1273,13 @@
             </div>
           </div>
         </div>
-        <div class="page-index"><b>14</b> / 15</div>
+        <div class="page-index"><b>15</b> / 16</div>
       </section>
 
       <!-- ============ PAGE 14 — 下一步 ============ -->
-      <section class="slide" data-title="下一步">
+      <section class="slide" data-title="下一步" data-nav="下一步">
         <div class="pad">
-          <span class="eyebrow">14 — Next Steps</span>
+          <span class="eyebrow">15 — Next Steps</span>
           <h1 class="title">下一步</h1>
           <p class="thesis">建議先召開一次共識會議，確認方向、名稱與試錄範圍，再啟動先導季製作。</p>
           <div class="step-list">
@@ -1196,7 +1315,7 @@
             <b>待確認事項：</b>① Annie 於三館的正式職稱與掛名方式　② 三館品牌識別與授權照片／影像素材　③ 正式合作範圍、製作週期與報價細節　④ 本簡報人物與空間視覺為概念示意，正式版本以實際拍攝或授權素材替換。
           </div>
         </div>
-        <div class="page-index"><b>15</b> / 15</div>
+        <div class="page-index"><b>16</b> / 16</div>
       </section>
 
     </div>
@@ -1207,7 +1326,7 @@
   <button class="nav-btn" id="prevBtn" aria-label="上一頁">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
   </button>
-  <div class="nav-counter"><b id="curNum">01</b> / 15&nbsp;&nbsp;<span id="curName" style="opacity:.75;"></span></div>
+  <div class="nav-counter"><b id="curNum">01</b> / 16&nbsp;&nbsp;<span id="curName" style="opacity:.75;"></span></div>
   <button class="nav-btn" id="nextBtn" aria-label="下一頁">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg>
   </button>
@@ -1231,10 +1350,63 @@
     });
     curNum.textContent = pad2(idx+1);
     curName.textContent = slides[idx].getAttribute('data-title') || '';
+    if (typeof markChip === 'function') markChip(idx);
   }
   function go(delta){
     idx = (idx + delta + total) % total;
     render();
+  }
+
+
+  /* ---------- 章節導覽列 ---------- */
+  var chapterScroll = document.getElementById('chapterScroll');
+  var chips = slides.map(function(s, i){
+    var b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'chip-ch';
+    b.innerHTML = '<span class="n">' + pad2(i+1) + '</span>' +
+                  (s.getAttribute('data-nav') || s.getAttribute('data-title') || ('第 ' + (i+1) + ' 頁'));
+    b.addEventListener('click', function(){ goTo(i); });
+    chapterScroll.appendChild(b);
+    return b;
+  });
+
+  function markChip(i){
+    chips.forEach(function(c, k){
+      if (k === i) { c.setAttribute('aria-current','true'); } else { c.removeAttribute('aria-current'); }
+    });
+    var c = chips[i];
+    if (c) {
+      /* 讓目前章節的按鈕保持在可視範圍內 */
+      var barL = chapterScroll.scrollLeft, barR = barL + chapterScroll.clientWidth;
+      if (c.offsetLeft < barL || c.offsetLeft + c.offsetWidth > barR){
+        chapterScroll.scrollTo({ left: c.offsetLeft - 20, behavior: 'smooth' });
+      }
+    }
+  }
+
+  function goTo(i){
+    if (mobileQ.matches){
+      /* 手機：跳到該章節。用即時捲動而非 smooth——長距離（近 10000px）的
+         平滑捲動在部分瀏覽器會被中斷而完全不動，且目錄跳轉本來就該立即到位。
+         頂端偏移交給 CSS 的 scroll-margin-top 處理。 */
+      slides[i].scrollIntoView({ block: 'start' });
+      markChip(i);
+    } else {
+      idx = i;
+      render();
+    }
+  }
+
+  /* 手機捲動時，自動標示目前所在章節 */
+  if ('IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(entries){
+      if (!mobileQ.matches) return;
+      entries.forEach(function(e){
+        if (e.isIntersecting) markChip(slides.indexOf(e.target));
+      });
+    }, { rootMargin: '-45% 0px -45% 0px', threshold: 0 });
+    slides.forEach(function(s){ io.observe(s); });
   }
 
   document.getElementById('prevBtn').addEventListener('click', function(){ go(-1); });
@@ -1254,7 +1426,9 @@
       return;
     }
     var vw = viewport.clientWidth - 36;
-    var vh = viewport.clientHeight - 92; /* reserve room so the fixed nav never overlaps the stage */
+    var bar = document.querySelector('.chapter-bar');
+    var barH = bar ? bar.getBoundingClientRect().height : 0;
+    var vh = viewport.clientHeight - 92 - barH; /* 扣掉底部翻頁列與頂部章節列 */
     var scale = Math.min(vw/1280, vh/720, 1);
     stageWrap.style.transform = 'scale(' + scale + ')';
   }
