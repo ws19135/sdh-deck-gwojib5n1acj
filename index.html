@@ -746,6 +746,59 @@
     .intl-grid{ grid-template-columns:1fr !important; gap:12px !important; }
     .intl-head{ height:64px; }
   }
+
+  /* ---------- 四階段流程（第 14／15 頁共用骨架，讓兩頁互相對照）---------- */
+  .stage-flow{ display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin-top:24px; }
+  .stage-card{
+    background:var(--white); border:1px solid rgba(23,61,58,.14);
+    padding:16px 16px 18px; display:flex; flex-direction:column; position:relative;
+  }
+  .stage-card::after{
+    content:"→"; position:absolute; right:-11px; top:50%; transform:translateY(-50%);
+    color:var(--gold); font-size:14px; z-index:2; line-height:1;
+  }
+  .stage-card:last-child::after{ content:none; }
+  .stage-card .sc-num{
+    font-family:'Inter',sans-serif; font-size:10.5px; font-weight:700; letter-spacing:.12em;
+    color:var(--gold); text-transform:uppercase;
+  }
+  .stage-card h3{
+    font-family:'Noto Serif TC',serif; font-size:16px; font-weight:700; color:var(--night);
+    margin:8px 0 7px; line-height:1.4;
+  }
+  .stage-card p{ font-size:11.5px; line-height:1.7; color:var(--ink); margin:0; flex:1; }
+  .stage-card.lead{ background:var(--night); border-color:var(--night); }
+  .stage-card.lead h3{ color:var(--ivory); }
+  .stage-card.lead p{ color:rgba(244,240,232,.82); }
+
+  /* 分工欄（第 15 頁：每階段誰做什麼）*/
+  .split{ margin-top:11px; border-top:1px solid rgba(23,61,58,.14); padding-top:10px; }
+  .split .sp{ display:flex; gap:8px; margin-bottom:7px; font-size:11px; line-height:1.6; }
+  .split .sp:last-child{ margin-bottom:0; }
+  .split .sp-who{
+    flex:none; width:44px; font-family:'Noto Sans TC',sans-serif; font-weight:700; font-size:10px;
+    letter-spacing:.02em; padding-top:1px;
+  }
+  .split .sp-sdh .sp-who{ color:var(--gold); }
+  .split .sp-htl .sp-who{ color:var(--pond); }
+  .split .sp-txt{ color:var(--ink); }
+  .stage-card.lead .split{ border-top-color:rgba(244,240,232,.22); }
+  .stage-card.lead .sp-txt{ color:rgba(244,240,232,.82); }
+
+  /* 底部補充條 */
+  .addendum{ margin-top:16px; display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+  .add-box{ border:1px solid rgba(23,61,58,.16); background:var(--ivory-2); padding:14px 16px; }
+  .add-box h4{
+    font-family:'Noto Serif TC',serif; font-size:13px; font-weight:700; color:var(--night); margin:0 0 6px;
+  }
+  .add-box p{ font-size:11.5px; line-height:1.7; color:var(--ink); margin:0; }
+  .add-box a{ color:var(--pond); font-weight:600; }
+
+  @media (max-width: 900px){
+    .stage-flow{ grid-template-columns:1fr !important; gap:10px !important; }
+    .stage-card::after{ content:none !important; }
+    .addendum{ grid-template-columns:1fr !important; }
+  }
 </style>
 </head>
 <body>
@@ -839,9 +892,7 @@
         </div>
         <div class="right">
           <div class="visual-block tex-b" style="height:100%;">
-            <span class="visual-tag">建議視覺</span>
             <div class="arch" style="width:70%;height:70%;"></div>
-            <div class="visual-caption">飯店客房或公共空間一隅的靜態人物剪影，搭配窗景自然光，不使用麥克風特寫。</div>
           </div>
         </div>
         <div class="page-index"><b>03</b> / 16</div>
@@ -875,10 +926,8 @@
       <section class="slide p-annie" data-title="為什麼是 Annie" data-nav="為什麼是 Annie">
         <div class="left">
           <div class="visual-block tex-c" style="height:100%;">
-            <span class="visual-tag">建議視覺</span>
             <div class="arch" style="width:66%;height:78%;"></div>
             <div class="figure-hint" style="right:32%;"></div>
-            <div class="visual-caption">Annie 在飯店空間中的自然肖像，建議捕捉她與員工／來賓互動，或凝視窗外城市的瞬間，呈現經營者視角。</div>
           </div>
         </div>
         <div class="right">
@@ -1078,9 +1127,7 @@
         </div>
         <div class="right">
           <div class="visual-block tex-c" style="height:100%;">
-            <span class="visual-tag">建議視覺</span>
             <div class="arch" style="width:70%;height:70%;"></div>
-            <div class="visual-caption">Annie 與來賓於飯店公共空間對談的自然抓拍，呈現對話感而非錄音室感。</div>
           </div>
         </div>
         <div class="page-index"><b>10</b> / 16</div>
@@ -1207,69 +1254,96 @@
         <div class="page-index"><b>13</b> / 16</div>
       </section>
 
-      <!-- ============ PAGE 12 — 內容擴散與商業價值 ============ -->
+      <!-- ============ PAGE 14 — 內容擴散與商業價值 ============ -->
       <section class="slide" data-title="內容擴散與商業價值" data-nav="擴散與價值">
-        <div class="pad">
+        <div class="pad" style="padding:54px 72px;">
           <span class="eyebrow">13 — Value</span>
-          <h1 class="title">內容擴散與商業價值</h1>
-          <p class="thesis">一次錄製，長成音頻、長影片、SEO 長文與短影音四種資產——同時服務品牌信任、搜尋能見度與城市曝光。</p>
-          <div class="flow-row">
-            <div class="flow-node origin">一次錄製<br>Podcast 本集</div>
-            <div class="flow-arrow">→</div>
-            <div class="flow-node">長影片<br>完整敘事</div>
-            <div class="flow-node">SEO 長文<br>搜尋能見度</div>
-            <div class="flow-node">短影音<br>社群聲量</div>
-            <div class="flow-arrow">→</div>
-            <div class="flow-node">三館官網 / 社群<br>城市媒體與異業曝光</div>
+          <h1 class="title" style="font-size:36px;">一次錄製，四種資產，長期複利</h1>
+          <p class="thesis" style="font-size:17px;max-width:800px;">內容不是拍完就結束——它會沿著這四個階段，一路長成三館可以長期使用的品牌資產。</p>
+          <div class="stage-flow">
+            <div class="stage-card lead">
+              <div class="sc-num">Stage 01</div>
+              <h3>錄製</h3>
+              <p>每集 30–40 分鐘，於三館空間進行，音頻與影像同步收錄——一次進場，取得後續所有素材。</p>
+            </div>
+            <div class="stage-card">
+              <div class="sc-num">Stage 02</div>
+              <h3>產製</h3>
+              <p>同一次錄製剪出四種資產：Podcast 本集、完整版長影片、SEO 深度長文、社群短影音與金句圖卡。</p>
+            </div>
+            <div class="stage-card">
+              <div class="sc-num">Stage 03</div>
+              <h3>發佈</h3>
+              <p>音頻上 Podcast 平台、影片上影音平台、長文進三館官網與部落格、短影音進社群與城市媒體。</p>
+            </div>
+            <div class="stage-card">
+              <div class="sc-num">Stage 04</div>
+              <h3>累積</h3>
+              <p>長文持續帶來搜尋流量、節目累積成 Annie 的 BOSS IP 與三館的內容庫，不隨單次活動結束而消失。</p>
+            </div>
           </div>
-          <div class="body-copy value-list">
-            <ul>
-              <li><b style="color:var(--night)">SEO 長文：</b>每集轉為深度長文，讓內容被搜尋得到——聽眾散場後，文章仍持續替三館累積自然流量與專業定位。</li>
-              <li><b style="color:var(--night)">長影片：</b>完整承載節目敘事與飯店空間畫面，觸及習慣「用看的」的客群，補上純音頻接觸不到的受眾。</li>
-              <li>逐集精華短影音與金句圖卡，延伸節目在社群的聲量與生命週期。</li>
-              <li>三館官網、社群與貴賓通路可長期共用的內容資產，不隨單次活動結束而消失。</li>
-              <li>城市人物與異業夥伴的曝光，逐步累積合作網絡與媒體能見度。</li>
-              <li>Annie 個人 BOSS IP 的長期積累，成為獨立於單一飯店品牌之外的資產。</li>
-            </ul>
+          <div class="addendum">
+            <div class="add-box">
+              <h4>為什麼四種資產都要做</h4>
+              <p><b>SEO 長文</b>讓內容被搜尋得到，聽眾散場後仍替三館累積自然流量；<b>長影片</b>完整承載敘事與飯店空間畫面，補上純音頻接觸不到的「用看的」客群；<b>短影音</b>負責社群聲量與生命週期。</p>
+            </div>
+            <div class="add-box">
+              <h4>三館拿到什麼</h4>
+              <p>一批官網、社群與貴賓通路可長期共用的內容資產；城市人物與異業夥伴的曝光網絡；以及一個獨立於單館品牌之外、能持續為三館背書的經營者 IP。</p>
+            </div>
           </div>
         </div>
         <div class="page-index"><b>14</b> / 16</div>
       </section>
 
-      <!-- ============ PAGE 13 — 合作製作範圍 ============ -->
+      <!-- ============ PAGE 15 — 合作製作範圍 ============ -->
       <section class="slide" data-title="合作製作範圍" data-nav="合作範圍">
-        <div class="pad">
+        <div class="pad" style="padding:54px 72px;">
           <span class="eyebrow">14 — Scope</span>
-          <h1 class="title">合作製作範圍（提案階段）</h1>
-          <p class="thesis">這是提案階段的建議分工，細節與週期將於雙方確認合作後共同訂定。</p>
-          <div class="scope-list">
-            <div class="scope-row">
-              <div class="scope-label">內容製作</div>
-              <div class="scope-desc">選題發展、訪綱撰寫、錄製、後製與上架排程。</div>
+          <h1 class="title" style="font-size:36px;">合作製作範圍（提案階段）</h1>
+          <p class="thesis" style="font-size:17px;max-width:800px;">沿用前一頁的四個階段——這是每一段由誰負責。細節與週期於雙方確認合作後共同訂定。</p>
+          <div class="stage-flow">
+            <div class="stage-card">
+              <div class="sc-num">Stage 01 · 錄製</div>
+              <h3>進場與收錄</h3>
+              <div class="split">
+                <div class="sp sp-sdh"><span class="sp-who">SDH</span><span class="sp-txt">高規格錄音錄影設備、現場執行與收音收影</span></div>
+                <div class="sp sp-htl"><span class="sp-who">三館</span><span class="sp-txt">場地使用、空間協調與現場協拍</span></div>
+              </div>
             </div>
-            <div class="scope-row">
-              <div class="scope-label">主持與來賓</div>
-              <div class="scope-desc">主持人統籌、訪綱共同開發；來賓可由 SDH 既有 <a href="https://erp.sdh-corp.com/kol-catalog" target="_blank" rel="noopener" style="color:var(--pond);font-weight:600;">KOL 合作名單</a> 直接媒合。</div>
+            <div class="stage-card">
+              <div class="sc-num">Stage 02 · 產製</div>
+              <h3>剪輯與轉寫</h3>
+              <div class="split">
+                <div class="sp sp-sdh"><span class="sp-who">SDH</span><span class="sp-txt">選題發展、訪綱撰寫、後製剪輯、長影片、SEO 長文、短影音素材</span></div>
+                <div class="sp sp-htl"><span class="sp-who">三館</span><span class="sp-txt">品牌素材與正確資訊提供</span></div>
+              </div>
             </div>
-            <div class="scope-row">
-              <div class="scope-label">三館協力</div>
-              <div class="scope-desc">場地使用、空間與品牌素材提供、拍攝／錄製現場協拍。</div>
+            <div class="stage-card">
+              <div class="sc-num">Stage 03 · 發佈</div>
+              <h3>上架與行銷</h3>
+              <div class="split">
+                <div class="sp sp-sdh"><span class="sp-who">SDH</span><span class="sp-txt">平台上架、發布排程、節目行銷推廣</span></div>
+                <div class="sp sp-htl"><span class="sp-who">三館</span><span class="sp-txt">官網與社群同步、內容審核與上線把關</span></div>
+              </div>
             </div>
-            <div class="scope-row">
-              <div class="scope-label">長影片產製</div>
-              <div class="scope-desc">錄製同時收錄影像，剪輯為完整版長影片，於影音平台發布。</div>
+            <div class="stage-card">
+              <div class="sc-num">Stage 04 · 累積</div>
+              <h3>優化與擴大</h3>
+              <div class="split">
+                <div class="sp sp-sdh"><span class="sp-who">SDH</span><span class="sp-txt">成效追蹤、選題優化、合作網絡擴散</span></div>
+                <div class="sp sp-htl"><span class="sp-who">三館</span><span class="sp-txt">在地人物與合作夥伴推薦</span></div>
+              </div>
             </div>
-            <div class="scope-row">
-              <div class="scope-label">SEO 長文</div>
-              <div class="scope-desc">每集轉寫為深度長文，配合關鍵字布局，供三館官網與部落格使用。</div>
+          </div>
+          <div class="addendum">
+            <div class="add-box">
+              <h4>主持與來賓</h4>
+              <p>主持人由 Annie 擔任，訪綱由雙方共同開發。來賓以桃園在地人物、三館合作夥伴與產業對象為主，由雙方共同提名、確認後邀約。</p>
             </div>
-            <div class="scope-row">
-              <div class="scope-label">擴散素材</div>
-              <div class="scope-desc">短影音、金句圖卡與社群發布素材製作。</div>
-            </div>
-            <div class="scope-row">
-              <div class="scope-label">品牌審核</div>
-              <div class="scope-desc">內容審核與上線流程，由三館與製作方共同把關。</div>
+            <div class="add-box">
+              <h4>延伸資源：飯店推廣 KOL 名單</h4>
+              <p>SDH 另備有<b>可與飯店合作推廣的 KOL 名單</b>，可用於住房體驗、餐飲宴會、節慶檔期等行銷推廣，與本節目為獨立可加選的項目。<br><a href="https://erp.sdh-corp.com/kol-catalog" target="_blank" rel="noopener">erp.sdh-corp.com/kol-catalog</a></p>
             </div>
           </div>
         </div>
