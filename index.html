@@ -1,0 +1,1267 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>款待一座城</title>
+<meta name="description" content="五星旅宿 Podcast × Annie BOSS IP 內容合作意向提案 — SDH 盛德好">
+<meta name="robots" content="noindex, nofollow">
+<meta property="og:type" content="website">
+<meta property="og:title" content="款待一座城">
+<meta property="og:description" content="五星旅宿 Podcast × Annie BOSS IP 內容合作意向提案 — SDH 盛德好">
+<meta name="twitter:card" content="summary">
+<meta name="theme-color" content="#173D3A">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;500;600;700;900&family=Noto+Sans+TC:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap">
+<style>
+  /* ============ Design tokens ============
+     Color   — night green #173D3A / ivory #F4F0E8 / mist #72828A /
+               champagne gold #B49A68 / charcoal #242424 / pond teal #557C73
+     Type    — headings: Noto Serif TC · body: Noto Sans TC ·
+               EN display: Cormorant Garamond · data/numerals: Inter
+     Layout  — fixed 1280×720 editorial "stage", asymmetric magazine grid,
+               one conclusion per page, thin gold rule as page marker.
+     Committed single visual world (print/deck artifact) — colors painted
+     explicitly, no dark-mode remap, per artifact-design guidance.
+  ================================================= */
+  :root{
+    --night:#173D3A;
+    --night-2:#0F2B29;
+    --ivory:#F4F0E8;
+    --ivory-2:#ECE6D9;
+    --mist:#72828A;
+    --gold:#B49A68;
+    --ink:#242424;
+    --pond:#557C73;
+    --white:#FFFFFF;
+    --shadow: 0 30px 60px -20px rgba(23,61,58,0.35);
+    --radius: 2px;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--night-2);
+    color:var(--ink);
+    font-family:'Noto Sans TC','Inter',sans-serif;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  ::selection{ background:var(--gold); color:var(--night);}
+
+  /* ---------- Viewport / stage scaffolding ---------- */
+  .deck-viewport{
+    width:100%;
+    height:100dvh;
+    min-height:520px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    position:relative;
+    background:
+      radial-gradient(120% 140% at 15% 10%, #1a4440 0%, var(--night-2) 55%, #0a201e 100%);
+    padding:18px;
+  }
+  .stage-wrap{
+    position:relative;
+    width:1280px;
+    height:720px;
+    flex:none;
+  }
+  .stage{
+    width:1280px;
+    height:720px;
+    position:relative;
+    background:var(--ivory);
+    box-shadow:var(--shadow);
+    overflow:hidden;
+    border-radius:3px;
+  }
+
+  .slide{
+    position:absolute; inset:0;
+    display:none;
+    opacity:0;
+  }
+  .slide.is-active{
+    display:block;
+    opacity:1;
+    animation:fadeIn .5s ease both;
+  }
+  /* grid 版面的頁面：需比 .slide.is-active 更具體，否則 display 被覆蓋成 block，
+     兩欄會塌成單欄、視覺區塊高度歸零 */
+  .slide.is-active.p-strategy{ display:grid; }
+  .slide.is-active.p-annie{ display:grid; }
+  @media (prefers-reduced-motion: reduce){
+    .slide.is-active{ animation:none; }
+  }
+  @keyframes fadeIn{ from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:translateY(0);} }
+
+  /* ---------- Shared editorial furniture ---------- */
+  .pad{ padding:64px 72px; height:100%; display:flex; flex-direction:column;}
+  .eyebrow{
+    font-family:'Inter',sans-serif;
+    font-size:12px;
+    letter-spacing:.16em;
+    text-transform:uppercase;
+    color:var(--gold);
+    font-weight:600;
+    display:flex; align-items:center; gap:10px;
+  }
+  .eyebrow::before{
+    content:"";
+    width:22px; height:1px; background:var(--gold);
+    display:inline-block;
+  }
+  h1.title{
+    font-family:'Noto Serif TC',serif;
+    font-weight:700;
+    color:var(--night);
+    font-size:40px;
+    line-height:1.25;
+    margin:14px 0 0;
+    text-wrap:balance;
+  }
+  .thesis{
+    font-family:'Noto Serif TC',serif;
+    font-weight:500;
+    font-size:19px;
+    line-height:1.7;
+    color:var(--night);
+    border-left:2px solid var(--gold);
+    padding-left:18px;
+    margin:22px 0 0;
+    max-width:560px;
+  }
+  .body-copy{
+    font-size:14.5px;
+    line-height:1.9;
+    color:var(--ink);
+    max-width:520px;
+  }
+  .body-copy p{ margin:0 0 12px; }
+  .body-copy ul{ margin:0; padding:0; list-style:none; }
+  .body-copy li{
+    position:relative;
+    padding-left:16px;
+    margin-bottom:10px;
+  }
+  .body-copy li::before{
+    content:"·";
+    position:absolute; left:0; top:0;
+    color:var(--gold);
+    font-weight:700;
+  }
+  .source-note{
+    font-family:'Inter',sans-serif;
+    font-size:10.5px;
+    color:var(--mist);
+    letter-spacing:.02em;
+    line-height:1.6;
+    padding-top:10px;
+    border-top:1px solid rgba(114,130,138,.28);
+  }
+  .visual-block{
+    position:relative;
+    border-radius:var(--radius);
+    overflow:hidden;
+    display:flex; align-items:flex-end;
+  }
+  .visual-caption{
+    font-family:'Cormorant Garamond',serif;
+    font-style:italic;
+    font-size:13.5px;
+    color:var(--ivory);
+    line-height:1.6;
+    padding:18px 22px;
+    position:relative; z-index:2;
+  }
+  .visual-tag{
+    position:absolute; top:16px; left:16px; z-index:3;
+    font-family:'Inter',sans-serif;
+    font-size:9.5px;
+    letter-spacing:.1em;
+    text-transform:uppercase;
+    color:var(--ivory);
+    background:rgba(23,61,58,.55);
+    padding:5px 9px;
+    border:1px solid rgba(244,240,232,.35);
+  }
+  .page-index{
+    position:absolute; bottom:26px; right:34px;
+    font-family:'Inter',sans-serif;
+    font-variant-numeric:tabular-nums;
+    font-size:11px;
+    color:var(--mist);
+    letter-spacing:.06em;
+  }
+  .page-index b{ color:var(--night); font-weight:700; }
+  /* 這兩種版面的頁碼落在右／左側深色視覺區上，需反白才看得見 */
+  .p-strategy .page-index, .p-annie .page-index{ color:rgba(244,240,232,.55); }
+  .p-strategy .page-index b, .p-annie .page-index b{ color:var(--ivory); }
+  .kicker-en{
+    font-family:'Cormorant Garamond',serif;
+    font-style:italic;
+    color:var(--pond);
+    font-size:14px;
+    letter-spacing:.03em;
+  }
+
+  /* generic textured "photo" surfaces — no fabricated likenesses,
+     just tonal architecture standing in for the real shoot */
+  .tex-a{ background:
+      linear-gradient(155deg, rgba(23,61,58,.15), rgba(23,61,58,.85) 70%),
+      linear-gradient(100deg,#3c6a63,#173D3A 55%,#0F2B29);
+  }
+  .tex-b{ background:
+      linear-gradient(160deg, rgba(180,154,104,.12), rgba(23,61,58,.9) 75%),
+      linear-gradient(120deg,#557C73,#173D3A 60%);
+  }
+  .tex-c{ background:
+      linear-gradient(170deg, rgba(114,130,138,.25), rgba(23,61,58,.92) 78%),
+      linear-gradient(110deg,#72828A,#25433F 60%,#173D3A);
+  }
+  .tex-d{ background:
+      linear-gradient(150deg, rgba(244,240,232,.10), rgba(15,43,41,.92) 72%),
+      linear-gradient(115deg,#1d4a45,#0F2B29 65%);
+  }
+
+  /* arch motif used across visual placeholders — echoes hospitality
+     architecture (doorways / windows) without depicting a real person */
+  .arch{
+    position:absolute; inset:auto 0 0 0; margin:0 auto;
+    width:64%; height:82%;
+    border:1.5px solid rgba(244,240,232,.3);
+    border-bottom:none;
+    border-radius:120px 120px 0 0;
+    bottom:-2px;
+  }
+  .arch::after{
+    content:""; position:absolute; left:50%; bottom:0; transform:translateX(-50%);
+    width:1px; height:100%; background:rgba(244,240,232,.18);
+  }
+
+  /* ---------- Navigation chrome ---------- */
+  .nav{
+    position:fixed; left:0; right:0; bottom:14px;
+    display:flex; align-items:center; justify-content:center;
+    gap:18px;
+    z-index:50;
+    font-family:'Inter',sans-serif;
+    pointer-events:none;
+  }
+  .nav *{ pointer-events:auto; }
+  .nav-btn{
+    width:38px; height:38px;
+    border-radius:50%;
+    border:1px solid rgba(244,240,232,.35);
+    background:rgba(15,43,41,.55);
+    color:var(--ivory);
+    display:flex; align-items:center; justify-content:center;
+    cursor:pointer;
+    transition:background .15s ease, transform .15s ease;
+    backdrop-filter:blur(6px);
+  }
+  .nav-btn:hover{ background:rgba(180,154,104,.5); }
+  .nav-btn:focus-visible{ outline:2px solid var(--gold); outline-offset:2px; }
+  .nav-btn svg{ width:14px; height:14px; }
+  .nav-counter{
+    font-size:11px; letter-spacing:.08em;
+    color:var(--ivory);
+    background:rgba(15,43,41,.55);
+    border:1px solid rgba(244,240,232,.25);
+    padding:8px 16px;
+    border-radius:20px;
+    backdrop-filter:blur(6px);
+    font-variant-numeric:tabular-nums;
+  }
+  .nav-counter b{ color:var(--gold); }
+
+  @media print{
+    .nav{ display:none; }
+    .deck-viewport{ display:block; height:auto; padding:0; background:var(--ivory); }
+    .stage-wrap{ width:auto; height:auto; }
+    .stage{ box-shadow:none; border-radius:0; width:1280px; height:720px; }
+    .slide{ position:relative; display:block !important; opacity:1 !important; page-break-after:always; animation:none !important; }
+  }
+
+
+  /* ============ Page-specific layouts ============ */
+
+  /* PAGE 1 — Cover */
+  .p-cover{ background:var(--night); }
+  .p-cover .photo-zone{
+    position:absolute; top:0; right:0; bottom:0; width:68%;
+    background:
+      linear-gradient(200deg, rgba(23,61,58,0) 0%, rgba(15,43,41,.55) 60%, rgba(15,43,41,.92) 100%),
+      linear-gradient(115deg,#3f6f67 0%, #204e49 42%, #0F2B29 100%);
+  }
+  .p-cover .photo-zone::before{
+    content:"";
+    position:absolute; inset:14% 14% 8% 20%;
+    border:1px solid rgba(244,240,232,.28);
+    border-radius:160px 160px 6px 6px;
+  }
+  .p-cover .photo-zone::after{
+    content:"";
+    position:absolute; left:50%; top:14%; bottom:8%; width:1px;
+    background:rgba(244,240,232,.16);
+    transform:translateX(-6%);
+  }
+  .p-cover .figure-hint{
+    position:absolute; right:26%; bottom:8%; width:64px; height:190px;
+    background:linear-gradient(180deg, rgba(244,240,232,.55), rgba(244,240,232,.08));
+    border-radius:32px 32px 4px 4px;
+    opacity:.8;
+  }
+  .p-cover .photo-tag{
+    position:absolute; top:36px; right:44px;
+    font-family:'Inter',sans-serif; font-size:9.5px; letter-spacing:.12em;
+    color:rgba(244,240,232,.7); text-transform:uppercase;
+  }
+  .p-cover .text-zone{
+    position:absolute; left:0; top:0; bottom:0; width:46%;
+    background:linear-gradient(120deg, var(--night) 62%, rgba(23,61,58,0) 100%);
+    display:flex; flex-direction:column; justify-content:center;
+    padding:0 0 96px 68px;
+    z-index:3;
+  }
+  .p-cover .cover-kicker{
+    font-family:'Inter',sans-serif; font-size:11.5px; letter-spacing:.22em;
+    text-transform:uppercase; color:var(--gold); font-weight:600;
+  }
+  .p-cover .cover-main{
+    font-family:'Noto Serif TC',serif; font-weight:900;
+    font-size:64px; line-height:1.18; color:var(--ivory);
+    margin:20px 0 4px; text-wrap:balance;
+  }
+  .p-cover .cover-en{
+    font-family:'Cormorant Garamond',serif; font-style:italic;
+    font-size:23px; color:var(--ivory); margin-bottom:26px;
+    letter-spacing:.06em; opacity:.92;
+  }
+  .p-cover .cover-sub{
+    font-family:'Noto Serif TC',serif; font-weight:500;
+    font-size:19px; color:var(--ivory); line-height:1.6;
+  }
+  .p-cover .cover-tiny{
+    font-family:'Noto Sans TC',sans-serif; font-size:13px;
+    color:var(--mist); margin-top:6px; letter-spacing:.02em;
+  }
+  .p-cover .cover-rule{
+    width:46px; height:2px; background:var(--gold); margin:22px 0;
+  }
+  .p-cover .cover-meta{
+    /* 需高於 .text-zone(z-index:3)，否則會被它的深綠漸層蓋住而變暗 */
+    position:absolute; left:68px; bottom:44px; right:auto; z-index:4;
+    font-family:'Noto Sans TC','Inter',sans-serif; font-size:11.5px; color:var(--ivory);
+    letter-spacing:.03em; line-height:1.85;
+  }
+  .p-cover .cover-meta b{ color:#FFFFFF; font-weight:600; }
+
+  .p-cover .cover-tagline{
+    font-family:'Noto Serif TC',serif; font-weight:500;
+    font-size:17px; line-height:1.65; color:var(--gold);
+    margin-top:14px; max-width:430px;
+    padding-top:14px; border-top:1px solid rgba(180,154,104,.45);
+  }
+
+  /* 外部連結按鈕（可點擊） */
+  .link-btn{
+    display:inline-flex; align-items:center; gap:8px;
+    font-family:'Noto Sans TC',sans-serif; font-size:12px; font-weight:600;
+    color:var(--night); background:var(--gold);
+    padding:9px 18px; border-radius:2px; text-decoration:none;
+    letter-spacing:.02em; transition:background .15s ease;
+  }
+  .link-btn:hover{ background:#c9ae7a; }
+  .link-btn:focus-visible{ outline:2px solid var(--night); outline-offset:2px; }
+  .link-btn.on-dark{ background:transparent; color:var(--gold); border:1px solid var(--gold); }
+  .link-btn.on-dark:hover{ background:rgba(180,154,104,.15); }
+  .link-btn .arw{ font-size:13px; }
+  .link-url{
+    font-family:'Inter',sans-serif; font-size:11px; color:var(--pond);
+    letter-spacing:.01em; word-break:break-all;
+  }
+  .link-note{ font-size:11.5px; color:var(--mist); line-height:1.6; }
+
+  /* PAGE 2 — 為什麼是 SDH */
+  .why-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:24px; }
+  .why-card{ border:1px solid rgba(23,61,58,.14); background:var(--white); padding:18px 16px; display:flex; flex-direction:column; }
+  .why-card .wc-num{ font-family:'Inter',sans-serif; font-size:10.5px; letter-spacing:.1em; color:var(--gold); font-weight:700; text-transform:uppercase; }
+  .why-card h3{ font-family:'Noto Serif TC',serif; font-size:15px; font-weight:700; color:var(--night); margin:8px 0 8px; line-height:1.45; }
+  .why-card p{ font-size:11.5px; line-height:1.75; color:var(--ink); margin:0; }
+  .proof-bar{
+    margin-top:16px; background:var(--night); color:var(--ivory);
+    padding:16px 22px; display:flex; align-items:center; gap:26px; flex-wrap:wrap;
+  }
+  .proof-bar .pb-label{ font-family:'Noto Serif TC',serif; font-size:12.5px; color:var(--gold); font-weight:700; flex:none; }
+  .proof-bar .pb-item{ font-size:11.5px; line-height:1.6; }
+  .proof-bar .pb-item b{ font-family:'Inter',sans-serif; font-size:17px; color:var(--gold); font-variant-numeric:tabular-nums; margin-right:4px; }
+
+  /* 案例頁 — 老闆 IP */
+  .boss-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin-top:20px; }
+  .stat-strip{
+    margin-top:15px; display:flex; align-items:center; gap:22px; flex-wrap:nowrap;
+    border-top:1px solid rgba(23,61,58,.18); border-bottom:1px solid rgba(23,61,58,.18);
+    padding:12px 2px;
+  }
+  .stat-strip .st{ font-size:11.5px; color:var(--ink); line-height:1.45; }
+  .stat-strip .st b{ font-family:'Inter',sans-serif; font-size:19px; color:var(--night); font-variant-numeric:tabular-nums; margin-right:5px; }
+  .stat-strip .st-src{ font-size:9.5px; color:var(--mist); margin-left:auto; text-align:right; line-height:1.5; flex:none; }
+  .boss-card{ border:1px solid rgba(23,61,58,.14); background:var(--white); display:flex; flex-direction:column; }
+  .boss-head{ height:76px; position:relative; display:flex; align-items:flex-end; }
+  .boss-head .bh-name{ position:relative; z-index:2; font-family:'Noto Serif TC',serif; font-weight:700; font-size:14px; color:var(--ivory); padding:12px 14px; line-height:1.4; }
+  .boss-body{ padding:13px 14px 15px; flex:1; display:flex; flex-direction:column; }
+  .boss-body .bb-who{ font-size:11px; color:var(--pond); margin:0 0 7px; line-height:1.5; font-weight:600; }
+  .boss-body p{ font-size:11px; line-height:1.7; color:var(--ink); margin:0; flex:1; }
+  .insight-box{
+    margin-top:18px; background:var(--night); color:var(--ivory);
+    padding:17px 24px; font-size:13px; line-height:1.85;
+    border-left:3px solid var(--gold);
+  }
+  .insight-box b{ color:var(--gold); }
+
+  /* PAGE 2/3 — text-forward strategy pages */
+  .p-strategy{ grid-template-columns:1fr 420px; height:100%; }
+  .p-strategy .left{ padding:64px 56px 64px 72px; display:flex; flex-direction:column; }
+  .p-strategy .right{ position:relative; }
+  .p-strategy .right .visual-block{ position:absolute; inset:0; }
+
+  /* PAGE 4 — three-layer framework */
+  .p-frame .pad{ padding:60px 72px; }
+  .layer-stack{ margin-top:30px; display:flex; flex-direction:column; gap:14px; max-width:920px; }
+  .layer-row{
+    display:grid; grid-template-columns:170px 1fr;
+    align-items:center;
+    border:1px solid rgba(23,61,58,.16);
+    background:var(--white);
+  }
+  .layer-name{
+    font-family:'Noto Serif TC',serif; font-weight:700; font-size:17px;
+    color:var(--ivory);
+    padding:20px 22px; height:100%;
+    display:flex; align-items:center;
+  }
+  .layer-row:nth-child(1) .layer-name{ background:var(--night); }
+  .layer-row:nth-child(2) .layer-name{ background:var(--pond); }
+  .layer-row:nth-child(3) .layer-name{ background:var(--gold); color:var(--night); }
+  .layer-desc{ padding:18px 24px; font-size:13.5px; line-height:1.8; color:var(--ink); }
+  .layer-desc .en{ font-family:'Cormorant Garamond',serif; font-style:italic; color:var(--mist); font-size:12.5px; display:block; margin-bottom:4px;}
+
+  /* PAGE 5 — Annie */
+  .p-annie{ grid-template-columns:440px 1fr; height:100%; }
+  .p-annie .left{ position:relative; }
+  .p-annie .left .visual-block{ position:absolute; inset:0; }
+  .p-annie .right{ padding:60px 64px 50px 56px; display:flex; flex-direction:column; }
+  .trait-grid{ display:grid; grid-template-columns:1fr 1fr; gap:14px 26px; margin:26px 0 0; }
+  .trait{
+    font-size:13.5px; line-height:1.65; color:var(--night);
+    padding:10px 0 10px 16px; border-left:2px solid var(--gold);
+  }
+  .bio-note{
+    font-size:12.5px; line-height:1.75; color:var(--ink);
+    background:var(--ivory-2); border:1px solid rgba(23,61,58,.1);
+    padding:15px 18px; margin-bottom:12px;
+  }
+
+  /* PAGE 6 — three properties */
+  .p-props .pad{ padding:56px 72px; }
+  .prop-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:18px; margin-top:26px; flex:1; }
+  .prop-card{ display:flex; flex-direction:column; border:1px solid rgba(23,61,58,.14); background:var(--white); }
+  .prop-card .prop-visual{ height:120px; position:relative; }
+  .prop-card .prop-body{ padding:18px 18px 20px; flex:1; display:flex; flex-direction:column; }
+  .prop-card h3{ font-family:'Noto Serif TC',serif; font-size:16px; font-weight:700; color:var(--night); margin:0 0 4px; }
+  .prop-card .role-en{ font-family:'Cormorant Garamond',serif; font-style:italic; font-size:12px; color:var(--pond); margin:0 0 10px; }
+  .prop-card p{ font-size:12px; line-height:1.75; color:var(--ink); margin:0; flex:1; }
+  .prop-card .tags{ display:flex; flex-wrap:wrap; gap:6px; margin-top:10px; }
+  .prop-card .tag{ font-size:9.5px; letter-spacing:.03em; color:var(--night); background:var(--ivory-2); padding:3px 7px; border-radius:10px; }
+
+  /* PAGE 7 — case studies */
+  .case-grid{ display:grid; grid-template-columns:1fr 1fr; gap:20px; margin-top:24px; }
+  .case-card{ border:1px solid rgba(23,61,58,.14); background:var(--white); display:flex; flex-direction:column; }
+  .case-cover{ height:132px; position:relative; }
+  .case-cover .name{ position:relative; z-index:2; font-family:'Noto Serif TC',serif; font-weight:700; font-size:17px; color:var(--ivory); padding:16px 18px; }
+  .case-body{ padding:16px 18px 18px; }
+  .case-body .insight{ font-family:'Noto Serif TC',serif; font-style:normal; font-weight:500; font-size:13.5px; color:var(--night); line-height:1.7; margin:0 0 8px; }
+  .case-body .focus{ font-size:11.5px; color:var(--mist); line-height:1.7; margin:0; }
+  .gap-box{
+    margin-top:20px; background:var(--night); color:var(--ivory);
+    padding:18px 24px; font-size:13px; line-height:1.85;
+    border-left:3px solid var(--gold);
+  }
+  .gap-box b{ color:var(--gold); }
+
+  /* PAGE 8 — positioning & audience */
+  .persona-row{ display:flex; flex-wrap:wrap; gap:10px; margin-top:18px; }
+  .persona-chip{
+    font-size:12px; color:var(--night); border:1px solid var(--pond);
+    padding:7px 14px; border-radius:20px; background:rgba(85,124,115,.07);
+  }
+
+  /* PAGE 9 — name directions */
+  .name-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-top:26px; flex:1; }
+  .name-card{
+    border:1px solid rgba(23,61,58,.15); background:var(--white);
+    display:flex; flex-direction:column; padding:22px 20px;
+    position:relative;
+  }
+  .name-card.primary{ background:var(--night); border-color:var(--night); }
+  .name-card .badge{
+    font-family:'Inter',sans-serif; font-size:9.5px; letter-spacing:.1em; text-transform:uppercase;
+    color:var(--gold); margin-bottom:14px; font-weight:600;
+  }
+  .name-card.primary .badge{ color:var(--gold); }
+  .name-card h3{ font-family:'Noto Serif TC',serif; font-weight:700; font-size:21px; color:var(--night); margin:0 0 10px; line-height:1.4; }
+  .name-card.primary h3{ color:var(--ivory); }
+  .name-card p{ font-size:12px; line-height:1.75; color:var(--ink); margin:0; flex:1; }
+  .name-card.primary p{ color:rgba(244,240,232,.85); }
+  .name-card .pin{ margin-top:14px; font-size:10.5px; color:var(--pond); font-style:italic; font-family:'Cormorant Garamond',serif; }
+  .name-card.primary .pin{ color:var(--gold); }
+
+  /* PAGE 10 — pillars */
+  .pillar-grid{ display:grid; grid-template-columns:repeat(5,1fr); gap:12px; margin-top:28px; flex:1; }
+  .pillar{ background:var(--white); border:1px solid rgba(23,61,58,.14); padding:18px 14px; display:flex; flex-direction:column; }
+  .pillar .num{ font-family:'Inter',sans-serif; font-size:11px; color:var(--gold); font-weight:700; }
+  .pillar h3{ font-family:'Noto Serif TC',serif; font-size:14px; font-weight:700; color:var(--night); margin:8px 0 8px; line-height:1.45; }
+  .pillar p{ font-size:11px; color:var(--ink); line-height:1.65; margin:0; }
+
+  /* PAGE 11 — pilot season timeline */
+  .timeline{ margin-top:28px; display:flex; flex-direction:column; gap:0; flex:1; }
+  .ep-row{
+    display:grid; grid-template-columns:80px 1fr; gap:20px;
+    padding:13px 0; border-bottom:1px solid rgba(23,61,58,.12);
+    align-items:center;
+  }
+  .ep-row:last-child{ border-bottom:none; }
+  .ep-num{ font-family:'Inter',sans-serif; font-size:20px; font-weight:700; color:var(--gold); font-variant-numeric:tabular-nums; }
+  .ep-title{ font-family:'Noto Serif TC',serif; font-size:14.5px; font-weight:500; color:var(--night); line-height:1.6; }
+  .ep-meta{ font-family:'Inter',sans-serif; font-size:10px; color:var(--mist); margin-top:8px; letter-spacing:.05em; }
+
+  /* PAGE 12 — value flow */
+  .flow-row{ display:flex; align-items:stretch; gap:8px; margin-top:26px; }
+  .flow-node{
+    flex:1; background:var(--white); border:1px solid rgba(23,61,58,.14);
+    padding:14px 10px; text-align:center; font-size:12px; color:var(--night);
+    font-family:'Noto Serif TC',serif; font-weight:500; line-height:1.55;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .flow-node.origin{ background:var(--night); color:var(--ivory); }
+  .flow-arrow{ color:var(--gold); font-size:15px; flex:none; display:flex; align-items:center; }
+  .value-list{ margin-top:20px; font-size:13.5px; line-height:1.8; max-width:100%; }
+  .value-list li{ margin-bottom:8px; }
+
+  /* PAGE 13 — scope */
+  .scope-list{ margin-top:24px; display:flex; flex-direction:column; gap:0; }
+  .scope-row{ display:grid; grid-template-columns:200px 1fr; padding:14px 0; border-bottom:1px solid rgba(23,61,58,.12); }
+  .scope-row:last-child{ border-bottom:none; }
+  .scope-label{ font-family:'Noto Serif TC',serif; font-weight:700; font-size:13.5px; color:var(--night); }
+  .scope-desc{ font-size:12.5px; color:var(--ink); line-height:1.75; }
+
+  /* PAGE 14 — next steps */
+  .step-list{ margin-top:26px; display:flex; flex-direction:column; gap:14px; max-width:640px; }
+  .step-row{ display:grid; grid-template-columns:36px 1fr; gap:16px; align-items:flex-start; }
+  .step-dot{
+    width:30px; height:30px; border-radius:50%; border:1.5px solid var(--gold);
+    color:var(--gold); font-family:'Inter',sans-serif; font-weight:700; font-size:13px;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .step-text b{ display:block; font-family:'Noto Serif TC',serif; font-size:14px; color:var(--night); margin-bottom:2px; }
+  .step-text span{ font-size:12px; color:var(--ink); line-height:1.6; }
+  .confirm-box{
+    margin-top:auto; padding-top:16px; border-top:1px solid rgba(114,130,138,.3);
+    font-size:10.5px; color:var(--mist); line-height:1.8;
+  }
+  .confirm-box b{ color:var(--night); }
+  /* ================= 手機版（≤900px）=================
+     桌機維持 1280×720 等比縮放舞台；手機改為單欄垂直捲動，
+     字級不再被縮小，所有投影片依序展開。 */
+  @media (max-width: 900px){
+    .deck-viewport{
+      display:block; height:auto; min-height:0; padding:0;
+      background:var(--night-2);
+    }
+    .stage-wrap{ width:100%; height:auto; transform:none !important; }
+    .stage{
+      width:100%; height:auto; border-radius:0; box-shadow:none;
+      overflow:visible; background:transparent;
+    }
+
+    /* 全部展開，取消絕對定位與淡入 */
+    .slide,
+    .slide.is-active,
+    .slide.is-active.p-strategy,
+    .slide.is-active.p-annie{
+      display:block !important; opacity:1 !important; animation:none !important;
+      position:relative; inset:auto;
+      background:var(--ivory);
+      border-bottom:8px solid var(--night-2);
+    }
+    .slide.p-cover{ background:var(--night); }
+
+    .pad{ padding:34px 20px 42px !important; height:auto; }
+
+    /* 頁碼改為靜態，置於每頁底部 */
+    .page-index{
+      position:static; text-align:right; padding:22px 20px 0;
+      font-size:11px; color:var(--mist);
+    }
+    .p-strategy .page-index, .p-annie .page-index{ color:var(--mist); }
+    .p-strategy .page-index b, .p-annie .page-index b{ color:var(--night); }
+
+    /* 手機字級 */
+    h1.title{ font-size:26px !important; margin-top:12px; }
+    .thesis{ font-size:16px !important; max-width:none; margin-top:16px; padding-left:14px; }
+    .body-copy{ font-size:15px; max-width:none; }
+    .eyebrow{ font-size:11px; }
+
+    /* 封面 */
+    .p-cover .photo-zone{ position:relative; width:100%; height:190px; }
+    .p-cover .photo-zone::before{ inset:16% 18% 6% 22%; }
+    .p-cover .figure-hint{ width:38px; height:104px; right:28%; }
+    .p-cover .photo-tag{ top:14px; right:18px; font-size:8.5px; }
+    .p-cover .text-zone{
+      position:relative; width:100%; padding:30px 20px 4px; background:var(--night);
+    }
+    .p-cover .cover-main{ font-size:40px; margin:14px 0 4px; }
+    .p-cover .cover-en{ font-size:18px; margin-bottom:18px; }
+    .p-cover .cover-sub{ font-size:16px; }
+    .p-cover .cover-tagline{ font-size:15px; max-width:none; }
+    .p-cover .cover-meta{
+      position:relative; left:auto; bottom:auto; padding:22px 20px 30px;
+      background:var(--night); font-size:12px;
+    }
+    .p-cover .page-index{ background:var(--night); color:rgba(244,240,232,.5); }
+    .p-cover .page-index b{ color:var(--ivory); }
+
+    /* 兩欄版面 → 單欄；視覺區塊改為橫幅 */
+    .p-strategy .left, .p-annie .right{ padding:34px 20px 8px !important; }
+    .p-strategy .right, .p-annie .left{ height:180px; position:relative; }
+    .visual-caption{ font-size:12.5px; padding:14px 16px; }
+
+    /* 多欄網格一律收成單欄 */
+    .why-grid, .prop-grid, .boss-grid, .name-grid, .case-grid, .trait-grid{
+      grid-template-columns:1fr !important; gap:12px !important;
+    }
+    .pillar-grid{ grid-template-columns:1fr 1fr !important; gap:10px !important; }
+    .layer-row, .scope-row{ grid-template-columns:1fr !important; }
+    .layer-name{ padding:12px 16px; }
+    .layer-desc{ padding:14px 16px; }
+    .scope-row{ padding:12px 0; gap:4px; }
+    .scope-label{ margin-bottom:2px; }
+
+    /* 橫向長條 → 直向堆疊 */
+    .proof-bar, .stat-strip{
+      flex-direction:column; align-items:flex-start; gap:9px;
+    }
+    .stat-strip .st-src{ margin-left:0; text-align:left; }
+    .flow-row{ flex-direction:column; align-items:stretch; gap:8px; }
+    .flow-arrow{ display:none; }
+    .flow-node{ padding:12px; }
+
+    .insight-box, .gap-box{
+      margin-right:0 !important; padding:14px 16px !important; font-size:12.5px !important;
+    }
+    .boss-head{ height:64px; }
+    .prop-card .prop-visual{ height:90px; }
+    .case-cover{ height:96px; }
+
+    /* 連結按鈕在手機上獨佔一行、加大點擊區 */
+    .link-btn{ padding:12px 20px; font-size:13px; }
+    .link-url{ margin-top:4px; }
+
+    /* 手機用捲動瀏覽，隱藏翻頁列 */
+    .nav{ display:none !important; }
+  }
+</style>
+</head>
+<body>
+<div class="deck-viewport" id="viewport">
+  <div class="stage-wrap" id="stageWrap">
+    <div class="stage" id="stage">
+
+      <!-- ============ PAGE 1 — 封面 ============ -->
+      <section class="slide is-active p-cover" data-title="封面">
+        <div class="photo-zone">
+          <span class="photo-tag">Monarch Hotels Group · Taoyuan</span>
+          <div class="arch"></div>
+          <div class="figure-hint"></div>
+        </div>
+        <div class="text-zone">
+          <span class="cover-kicker">Content Partnership Proposal</span>
+          <h1 class="cover-main">款待<br>一座城</h1>
+          <div class="cover-en">A City, Hosted</div>
+          <div class="cover-rule"></div>
+          <div class="cover-sub">五星旅宿 Podcast × Annie BOSS IP</div>
+          <div class="cover-tagline">以飯店為觀景台，<br>談城市、文化、服務、美學與企業經營</div>
+        </div>
+        <div class="cover-meta">
+          提案對象　<b>簡歆瑜 Annie</b><br>
+          企劃　Winnie ｜ 提案日期　2026.08
+        </div>
+        <div class="page-index"><b>01</b> / 15</div>
+      </section>
+
+      <!-- ============ PAGE 2 — 為什麼與 SDH 合作 ============ -->
+      <section class="slide" data-title="為什麼與 SDH 合作">
+        <div class="pad">
+          <span class="eyebrow">01 — Why SDH</span>
+          <h1 class="title">為什麼與 SDH 盛德好合作</h1>
+          <p class="thesis">我們不是接案的製作公司，而是把一集節目養成長期品牌資產的內容夥伴——而且，我們本來就從旅宿產業長出來。</p>
+          <div class="why-grid">
+            <div class="why-card">
+              <div class="wc-num">01 · Origin</div>
+              <h3>從旅宿產業<br>長出來的團隊</h3>
+              <p>盛德好成立於 2019 年，在台北旅店集團董事長戴彰紀先生的支持下誕生。我們理解飯店的服務語言與品牌分寸，不需要從零解釋這個產業。</p>
+            </div>
+            <div class="why-card">
+              <div class="wc-num">02 · Full Service</div>
+              <h3>企劃到行銷<br>一條龍承接</h3>
+              <p>高規格錄音錄影、節目企劃、後期製作、上架與節目行銷全程支援。三館只需提供空間與觀點，其餘由我們扛。</p>
+            </div>
+            <div class="why-card">
+              <div class="wc-num">03 · IP Building</div>
+              <h3>專做<br>知識型 IP 打造</h3>
+              <p>我們的核心業務就是替專業領域意見領袖建立清晰人設與長期影響力——這正是 Annie BOSS IP 需要的能力。</p>
+            </div>
+          </div>
+          <div class="proof-bar">
+            <span class="pb-label">實績　《郝聲音》</span>
+            <span class="pb-item">起步時粉專不到 3,000 人、單集收聽僅三位數</span>
+            <span class="pb-item"><b>30×</b>不重複收聽人數成長</span>
+            <span class="pb-item"><b>2</b>個以上／月 商案合作</span>
+            <span class="pb-item">延伸天下文化 YouTube 節目與線上課程</span>
+          </div>
+          <div style="margin-top:18px;display:flex;align-items:center;gap:16px;">
+            <a class="link-btn" href="https://erp.sdh-corp.com/kol-catalog" target="_blank" rel="noopener">瀏覽可合作 KOL 名單<span class="arw">→</span></a>
+            <div>
+              <div class="link-note">節目來賓與異業合作，可直接從我們既有的 KOL 資源池媒合。</div>
+              <div class="link-url">erp.sdh-corp.com/kol-catalog</div>
+            </div>
+          </div>
+        </div>
+        <div class="page-index"><b>02</b> / 15</div>
+      </section>
+
+      <!-- ============ PAGE 3 — 市場與品牌機會 ============ -->
+      <section class="slide p-strategy" data-title="市場與品牌機會">
+        <div class="left">
+          <span class="eyebrow">02 — The Opening</span>
+          <h1 class="title">市場與品牌機會</h1>
+          <p class="thesis">Podcast 能做到影像做不到的事——用聲音的陪伴感，把「經營者的觀點」變成聽眾願意長期追蹤的人物 IP。</p>
+          <div class="body-copy" style="margin-top:24px;">
+            <ul>
+              <li><b style="color:var(--night)">對聽眾：</b>長音頻建立的是信任感與陪伴感，比單次曝光的社群貼文更容易留下深刻印象。</li>
+              <li><b style="color:var(--night)">對品牌：</b>一集節目能同時承載品牌故事、服務理念與城市內容，是三館目前行銷組合裡還沒有的內容資產類型。</li>
+              <li><b style="color:var(--night)">對 Annie：</b>主持人身份能讓她的經營觀點被長期、系統性地看見，建立起「BOSS IP」，而非單次曝光的個人形象。</li>
+            </ul>
+          </div>
+        </div>
+        <div class="right">
+          <div class="visual-block tex-b" style="height:100%;">
+            <span class="visual-tag">建議視覺</span>
+            <div class="arch" style="width:70%;height:70%;"></div>
+            <div class="visual-caption">飯店客房或公共空間一隅的靜態人物剪影，搭配窗景自然光，不使用麥克風特寫。</div>
+          </div>
+        </div>
+        <div class="page-index"><b>03</b> / 15</div>
+      </section>
+
+      <!-- ============ PAGE 4 — 三層架構 ============ -->
+      <section class="slide p-frame" data-title="BOSS IP × 飯店品牌 × 桃園城市內容">
+        <div class="pad">
+          <span class="eyebrow">03 — The Framework</span>
+          <h1 class="title">BOSS IP × 飯店品牌 × 桃園城市內容</h1>
+          <p class="thesis">一次製作，同時長出三層資產——人物被記住、品牌被信任、城市被重新認識。</p>
+          <div class="layer-stack">
+            <div class="layer-row">
+              <div class="layer-name">人物層</div>
+              <div class="layer-desc"><span class="en">Character Layer</span>Annie 的經營觀點、選擇與故事，建立可長期追蹤的 BOSS IP。</div>
+            </div>
+            <div class="layer-row">
+              <div class="layer-name">品牌層</div>
+              <div class="layer-desc"><span class="en">Brand Layer</span>尊爵大飯店、尊爵天際大飯店、千塘行旅的服務、美學與品牌精神。</div>
+            </div>
+            <div class="layer-row">
+              <div class="layer-name">城市層</div>
+              <div class="layer-desc"><span class="en">City Layer</span>桃園人物、文化、飲食、產業與旅行，建立長期的城市內容入口。</div>
+            </div>
+          </div>
+        </div>
+        <div class="page-index"><b>04</b> / 15</div>
+      </section>
+
+      <!-- ============ PAGE 5 — 為什麼是 Annie ============ -->
+      <section class="slide p-annie" data-title="為什麼是 Annie">
+        <div class="left">
+          <div class="visual-block tex-c" style="height:100%;">
+            <span class="visual-tag">建議視覺</span>
+            <div class="arch" style="width:66%;height:78%;"></div>
+            <div class="figure-hint" style="right:32%;"></div>
+            <div class="visual-caption">Annie 在飯店空間中的自然肖像，建議捕捉她與員工／來賓互動，或凝視窗外城市的瞬間，呈現經營者視角。</div>
+          </div>
+        </div>
+        <div class="right">
+          <span class="eyebrow">04 — The Host</span>
+          <h1 class="title" style="font-size:34px;">為什麼是 Annie</h1>
+          <p class="thesis" style="font-size:17px;">她從第一線銷售走到經營決策，懂服務現場，也懂決策高度——這種真實層次感，是 IP 最好的起手式。</p>
+          <div class="trait-grid">
+            <div class="trait">從第一線銷售與實戰經驗，走進經營決策</div>
+            <div class="trait">獨立而非單純承襲</div>
+            <div class="trait">專業而非只有頭銜</div>
+            <div class="trait">有品味但不疏離</div>
+            <div class="trait">有決策高度，也理解服務現場</div>
+            <div class="trait">適合成為旅宿經營者、女性領導者與桃園城市內容策展人</div>
+          </div>
+        </div>
+        <div class="page-index"><b>05</b> / 15</div>
+      </section>
+
+      <!-- ============ PAGE 6 — 老闆 IP 做 Podcast ============ -->
+      <section class="slide" data-title="老闆親自開口：已被驗證的模式">
+        <div class="pad" style="padding:52px 72px;">
+          <span class="eyebrow">05 — Proven Model</span>
+          <h1 class="title" style="font-size:36px;">老闆親自開口，是已經被驗證的模式</h1>
+          <p class="thesis" style="font-size:17px;max-width:780px;">在國際上，創辦人主持的節目能長成一線媒體；台灣各產業的經營者也早已開口。但在台灣旅宿業，「經營者本人坐到麥克風前」這個位置，還空著。</p>
+          <div class="boss-grid">
+            <div class="boss-card">
+              <div class="boss-head tex-a"><div class="bh-name">The Diary<br>Of A CEO</div></div>
+              <div class="boss-body">
+                <div class="bb-who">Steven Bartlett<br>Social Chain 創辦人</div>
+                <p>2024 年跨平台突破 10 億次串流，並獲 Apple 認證為英國下載量最高的 Podcast。創辦人 IP 長成一線媒體的代表。</p>
+              </div>
+            </div>
+            <div class="boss-card">
+              <div class="boss-head tex-b"><div class="bh-name">Soho House<br>品牌節目群</div></div>
+              <div class="boss-body">
+                <div class="bb-who">Kate Bryan<br>Soho House 全球典藏總監</div>
+                <p>國際款待品牌自製多檔節目，其中《How To Be An Artist》由品牌高管親自主持——款待品牌做內容 IP 的標竿。</p>
+              </div>
+            </div>
+            <div class="boss-card">
+              <div class="boss-head tex-c"><div class="bh-name">經營男不難</div></div>
+              <div class="boss-body">
+                <div class="bb-who">陳宗賢教授<br>曾任 71 家企業總經理及執行長</div>
+                <p>已累積 222 集、每月兩更。台灣「經營者用長期節目建立專業權威」最具規模的實例。</p>
+              </div>
+            </div>
+            <div class="boss-card">
+              <div class="boss-head tex-d"><div class="bh-name">說說餐飲</div></div>
+              <div class="boss-body">
+                <div class="bb-who">James<br>餐飲創業平台「開吧」主理人</div>
+                <p>主理人親自主持，談自身創業心得並邀請餐廳老闆分享——同業經營者互訪，把節目做成產業聚點。</p>
+              </div>
+            </div>
+          </div>
+          <div class="stat-strip">
+            <span class="st"><b>47.8%</b>台灣民眾收聽 Podcast</span>
+            <span class="st"><b>35.8%</b>股市／財經／商業（最常收聽第 1 名）</span>
+            <span class="st"><b>27.2%</b>旅遊資訊（第 3 名）</span>
+            <span class="st-src">創市際市場研究顧問<br>2025 年 10 月調查，n=1,291</span>
+          </div>
+          <div class="insight-box" style="margin-top:14px;margin-right:96px;padding:15px 24px;font-size:12.5px;">
+            <b>這對三館的意義：</b>台灣聽眾最常收聽的兩個主場——<b>財經商業</b>與<b>旅遊資訊</b>——正好交會在「旅宿經營者」這個身分上。Annie 站上這個位置，不是跟風，是先行。
+          </div>
+        </div>
+        <div class="page-index"><b>06</b> / 15</div>
+      </section>
+
+      <!-- ============ PAGE 6 — 三館內容角色 ============ -->
+      <section class="slide p-props" data-title="三館內容角色">
+        <div class="pad">
+          <span class="eyebrow">06 — The Properties</span>
+          <h1 class="title">三館內容角色</h1>
+          <p class="thesis">三館在節目裡各自扮演不同的城市敘事者，彼此互補、不重疊。</p>
+          <div class="prop-grid">
+            <div class="prop-card">
+              <div class="prop-visual tex-a"><span class="visual-tag" style="top:10px;left:10px;">建議視覺</span></div>
+              <div class="prop-body">
+                <h3>尊爵大飯店</h3>
+                <div class="role-en">Monarch Hotel</div>
+                <p>官網品牌語句：「尊爵之美在於從心出發的溫暖」，定位立足桃園、在地深耕，肩負國家門戶城市使命；涵蓋客房、四季咖啡廳、鐵板燒、宴會廳與皇家俱樂部設施。</p>
+                <div class="tags">
+                  <span class="tag">城市商務</span><span class="tag">餐飲宴會</span><span class="tag">皇家俱樂部</span>
+                </div>
+              </div>
+            </div>
+            <div class="prop-card">
+              <div class="prop-visual tex-b"><span class="visual-tag" style="top:10px;left:10px;">建議視覺</span></div>
+              <div class="prop-body">
+                <h3>尊爵天際大飯店</h3>
+                <div class="role-en">Skyline Hotel</div>
+                <p>台灣新時尚精品商務飯店，距桃園國際機場 20 分鐘內車程，是名副其實的國際門戶據點。節目在此展開機場經濟、移動生活與國際接待的城市線索。</p>
+                <div class="tags">
+                  <span class="tag">國際門戶</span><span class="tag">精品商務</span><span class="tag">機場經濟</span>
+                </div>
+              </div>
+            </div>
+            <div class="prop-card">
+              <div class="prop-visual tex-d"><span class="visual-tag" style="top:10px;left:10px;">建議視覺</span></div>
+              <div class="prop-body">
+                <h3>千塘行旅</h3>
+                <div class="role-en">ChienTang Art Hotel</div>
+                <p>位於桃園八德的文創藝術旅宿，登瑞集團旅宿事業的重要品牌。延續尊爵體系的服務精神，以藝術、美學、永續與在地文化為核心，是節目談地方創生與埤塘記憶的核心場景。</p>
+                <div class="tags">
+                  <span class="tag">文創藝術</span><span class="tag">在地文化</span><span class="tag">永續美學</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="page-index"><b>07</b> / 15</div>
+      </section>
+
+      <!-- ============ PAGE 7 — 市場案例與缺口 ============ -->
+      <section class="slide" data-title="台灣市場案例與市場缺口">
+        <div class="pad">
+          <span class="eyebrow">07 — The Gap</span>
+          <h1 class="title">台灣市場案例與市場缺口</h1>
+          <p class="thesis">現有節目說的是「飯店幕後」與「職人生涯」，還沒有人用「經營者視角」長期談一座城市。</p>
+          <div class="case-grid">
+            <div class="case-card">
+              <div class="case-cover tex-a"><div class="name">Get A Room</div></div>
+              <div class="case-body">
+                <p class="insight">策略洞察：用高階主管與員工的第一人稱故事，讓「飯店幕後」成為認識阿里山文化的入口——但主持者是品牌，不是某一個人。</p>
+                <p class="focus">阿里山英迪格酒店官方自製｜2024 年 11 月開播、雙週更新、已累積 33 集｜聚焦飯店幕後、高階主管與員工故事、阿里山文化</p>
+              </div>
+            </div>
+            <div class="case-card">
+              <div class="case-cover tex-b"><div class="name">酒店人生</div></div>
+              <div class="case-body">
+                <p class="insight">策略洞察：以「職涯與部門故事」建立產業縱深，適合想了解飯店專業的聽眾長期收聽。</p>
+                <p class="focus">由 Grace（9 年當上國際品牌酒店總經理）與 Karen（酒店行銷業務 18 年）共同主持｜個人職涯性質節目，非飯店官方頻道</p>
+              </div>
+            </div>
+          </div>
+          <div class="gap-box">
+            <b>市場缺口：</b>台灣旅宿內容目前分兩類——品牌官方製作的幕後節目，以及從業者的職涯分享。<b>由旅宿經營者本人具名主持</b>，以飯店為觀景台長期談城市、文化、服務、美學與企業經營的節目，尚未出現。這正是《款待一座城》要站上的位置。
+          </div>
+        </div>
+        <div class="page-index"><b>08</b> / 15</div>
+      </section>
+
+      <!-- ============ PAGE 8 — 節目定位及受眾 ============ -->
+      <section class="slide p-strategy" data-title="節目定位及受眾">
+        <div class="left">
+          <span class="eyebrow">08 — Positioning</span>
+          <h1 class="title">節目定位及受眾</h1>
+          <p class="thesis">由旅宿經營者出發，邀請城市裡值得認識的人，一起聊服務、生活、美學與桃園的下一種可能。</p>
+          <div class="body-copy" style="margin-top:22px;">
+            <p style="color:var(--mist);font-size:12px;letter-spacing:.04em;">建議受眾輪廓</p>
+          </div>
+          <div class="persona-row">
+            <span class="persona-chip">桃園在地與移居生活者</span>
+            <span class="persona-chip">旅宿餐飲美學愛好者</span>
+            <span class="persona-chip">女性創業與領導者</span>
+            <span class="persona-chip">關注城市發展／地方創生者</span>
+            <span class="persona-chip">商務與國際旅人</span>
+          </div>
+        </div>
+        <div class="right">
+          <div class="visual-block tex-c" style="height:100%;">
+            <span class="visual-tag">建議視覺</span>
+            <div class="arch" style="width:70%;height:70%;"></div>
+            <div class="visual-caption">Annie 與來賓於飯店公共空間對談的自然抓拍，呈現對話感而非錄音室感。</div>
+          </div>
+        </div>
+        <div class="page-index"><b>09</b> / 15</div>
+      </section>
+
+      <!-- ============ PAGE 9 — 節目名稱方向 ============ -->
+      <section class="slide" data-title="節目名稱方向">
+        <div class="pad">
+          <span class="eyebrow">09 — The Name</span>
+          <h1 class="title">節目名稱方向</h1>
+          <p class="thesis">《款待一座城》作為本次提案暫定名，精準濃縮核心主張；正式名稱將於合作確認後共同定案。</p>
+          <div class="name-grid">
+            <div class="name-card">
+              <div class="badge">Direction 01</div>
+              <h3>Annie 的<br>城市會客室</h3>
+              <p>人物色彩最強，直接強化 Annie 的 BOSS IP 辨識度，適合以主持人個人品牌為主軸的推廣。</p>
+              <div class="pin">Character-first</div>
+            </div>
+            <div class="name-card">
+              <div class="badge">Direction 02</div>
+              <h3>一泊一城</h3>
+              <p>借旅宿「一泊二食」的語感，把「住一晚」與「認識一座城」綁在一起。字面精練、有停留感，最貼近五星旅宿的品牌高度。</p>
+              <div class="pin">City-first · 精品旅宿語感</div>
+            </div>
+            <div class="name-card primary">
+              <div class="badge">Direction 03 · 建議暫定</div>
+              <h3>款待一座城</h3>
+              <p>精準對應核心主張——不只是介紹一間飯店，而是帶聽眾重新認識一座城市。「款待」雙關飯店服務與城市待客之道。</p>
+              <div class="pin">Recommended working title</div>
+            </div>
+          </div>
+        </div>
+        <div class="page-index"><b>10</b> / 15</div>
+      </section>
+
+      <!-- ============ PAGE 10 — 五大內容支柱 ============ -->
+      <section class="slide" data-title="五大內容支柱">
+        <div class="pad">
+          <span class="eyebrow">10 — Content Pillars</span>
+          <h1 class="title">五大內容支柱</h1>
+          <p class="thesis">五根支柱各自對應人物、品牌、城市三層，確保長期選題源源不絕。</p>
+          <div class="pillar-grid">
+            <div class="pillar">
+              <div class="num">01</div>
+              <h3>BOSS 的<br>經營現場</h3>
+              <p>決策現場、經營選擇與挑戰，呈現 Annie 的判斷與思考方式。</p>
+            </div>
+            <div class="pillar">
+              <div class="num">02</div>
+              <h3>飯店裡的人</h3>
+              <p>部門故事、團隊與服務背後的人，讓五星服務有具體的臉孔。</p>
+            </div>
+            <div class="pillar">
+              <div class="num">03</div>
+              <h3>從飯店出發，<br>認識桃園</h3>
+              <p>以飯店為據點，延伸桃園的文化、產業與生活場景。</p>
+            </div>
+            <div class="pillar">
+              <div class="num">04</div>
+              <h3>城市合作與<br>人物會客室</h3>
+              <p>邀訪桃園值得認識的人物與合作夥伴，擴大內容網絡。</p>
+            </div>
+            <div class="pillar">
+              <div class="num">05</div>
+              <h3>品味與款待</h3>
+              <p>美學、餐飲與生活方式視角，呼應「款待」的品牌精神。</p>
+            </div>
+          </div>
+        </div>
+        <div class="page-index"><b>11</b> / 15</div>
+      </section>
+
+      <!-- ============ PAGE 11 — 先導季規劃 ============ -->
+      <section class="slide" data-title="先導季6集規劃">
+        <div class="pad">
+          <span class="eyebrow">11 — Pilot Season</span>
+          <h1 class="title">先導季 6 集規劃</h1>
+          <p class="thesis">6 集、雙週更新、每集 30–40 分鐘，從「為什麼開這個節目」出發，逐集展開品牌、城市、飲食與未來命題。</p>
+          <div class="timeline">
+            <div class="ep-row">
+              <div class="ep-num">01</div>
+              <div>
+                <div class="ep-title">為什麼一位旅宿經營者，想開一個談城市的節目？</div>
+                <div class="ep-meta">人物層 · 開場宣言：節目要帶聽眾看見什麼</div>
+              </div>
+            </div>
+            <div class="ep-row">
+              <div class="ep-num">02</div>
+              <div>
+                <div class="ep-title">五星級服務的真相：客人沒看見的 100 個細節</div>
+                <div class="ep-meta">品牌層 · 飯店裡的人</div>
+              </div>
+            </div>
+            <div class="ep-row">
+              <div class="ep-num">03</div>
+              <div>
+                <div class="ep-title">桃園不只是機場：為什麼值得多留一晚？</div>
+                <div class="ep-meta">城市層 · 從飯店出發，認識桃園</div>
+              </div>
+            </div>
+            <div class="ep-row">
+              <div class="ep-num">04</div>
+              <div>
+                <div class="ep-title">一座飯店如何收藏桃園的藝術與土地故事？</div>
+                <div class="ep-meta">城市層 · 城市合作與人物會客室</div>
+              </div>
+            </div>
+            <div class="ep-row">
+              <div class="ep-num">05</div>
+              <div>
+                <div class="ep-title">從一道菜認識桃園：主廚與在地食材的對話</div>
+                <div class="ep-meta">品牌層 · 品味與款待</div>
+              </div>
+            </div>
+            <div class="ep-row">
+              <div class="ep-num">06</div>
+              <div>
+                <div class="ep-title">下一個十年，我想把桃園帶到什麼地方？</div>
+                <div class="ep-meta">人物層 · BOSS 的經營現場（季末展望）</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="page-index"><b>12</b> / 15</div>
+      </section>
+
+      <!-- ============ PAGE 12 — 內容擴散與商業價值 ============ -->
+      <section class="slide" data-title="內容擴散與商業價值">
+        <div class="pad">
+          <span class="eyebrow">12 — Value</span>
+          <h1 class="title">內容擴散與商業價值</h1>
+          <p class="thesis">一次錄製，長成音頻、長影片、SEO 長文與短影音四種資產——同時服務品牌信任、搜尋能見度與城市曝光。</p>
+          <div class="flow-row">
+            <div class="flow-node origin">一次錄製<br>Podcast 本集</div>
+            <div class="flow-arrow">→</div>
+            <div class="flow-node">長影片<br>完整敘事</div>
+            <div class="flow-node">SEO 長文<br>搜尋能見度</div>
+            <div class="flow-node">短影音<br>社群聲量</div>
+            <div class="flow-arrow">→</div>
+            <div class="flow-node">三館官網 / 社群<br>城市媒體與異業曝光</div>
+          </div>
+          <div class="body-copy value-list">
+            <ul>
+              <li><b style="color:var(--night)">SEO 長文：</b>每集轉為深度長文，讓內容被搜尋得到——聽眾散場後，文章仍持續替三館累積自然流量與專業定位。</li>
+              <li><b style="color:var(--night)">長影片：</b>完整承載節目敘事與飯店空間畫面，觸及習慣「用看的」的客群，補上純音頻接觸不到的受眾。</li>
+              <li>逐集精華短影音與金句圖卡，延伸節目在社群的聲量與生命週期。</li>
+              <li>三館官網、社群與貴賓通路可長期共用的內容資產，不隨單次活動結束而消失。</li>
+              <li>城市人物與異業夥伴的曝光，逐步累積合作網絡與媒體能見度。</li>
+              <li>Annie 個人 BOSS IP 的長期積累，成為獨立於單一飯店品牌之外的資產。</li>
+            </ul>
+          </div>
+        </div>
+        <div class="page-index"><b>13</b> / 15</div>
+      </section>
+
+      <!-- ============ PAGE 13 — 合作製作範圍 ============ -->
+      <section class="slide" data-title="合作製作範圍">
+        <div class="pad">
+          <span class="eyebrow">13 — Scope</span>
+          <h1 class="title">合作製作範圍（提案階段）</h1>
+          <p class="thesis">這是提案階段的建議分工，細節與週期將於雙方確認合作後共同訂定。</p>
+          <div class="scope-list">
+            <div class="scope-row">
+              <div class="scope-label">內容製作</div>
+              <div class="scope-desc">選題發展、訪綱撰寫、錄製、後製與上架排程。</div>
+            </div>
+            <div class="scope-row">
+              <div class="scope-label">主持與來賓</div>
+              <div class="scope-desc">主持人統籌、訪綱共同開發；來賓可由 SDH 既有 <a href="https://erp.sdh-corp.com/kol-catalog" target="_blank" rel="noopener" style="color:var(--pond);font-weight:600;">KOL 合作名單</a> 直接媒合。</div>
+            </div>
+            <div class="scope-row">
+              <div class="scope-label">三館協力</div>
+              <div class="scope-desc">場地使用、空間與品牌素材提供、拍攝／錄製現場協拍。</div>
+            </div>
+            <div class="scope-row">
+              <div class="scope-label">長影片產製</div>
+              <div class="scope-desc">錄製同時收錄影像，剪輯為完整版長影片，於影音平台發布。</div>
+            </div>
+            <div class="scope-row">
+              <div class="scope-label">SEO 長文</div>
+              <div class="scope-desc">每集轉寫為深度長文，配合關鍵字布局，供三館官網與部落格使用。</div>
+            </div>
+            <div class="scope-row">
+              <div class="scope-label">擴散素材</div>
+              <div class="scope-desc">短影音、金句圖卡與社群發布素材製作。</div>
+            </div>
+            <div class="scope-row">
+              <div class="scope-label">品牌審核</div>
+              <div class="scope-desc">內容審核與上線流程，由三館與製作方共同把關。</div>
+            </div>
+          </div>
+        </div>
+        <div class="page-index"><b>14</b> / 15</div>
+      </section>
+
+      <!-- ============ PAGE 14 — 下一步 ============ -->
+      <section class="slide" data-title="下一步">
+        <div class="pad">
+          <span class="eyebrow">14 — Next Steps</span>
+          <h1 class="title">下一步</h1>
+          <p class="thesis">建議先召開一次共識會議，確認方向、名稱與試錄範圍，再啟動先導季製作。</p>
+          <div class="step-list">
+            <div class="step-row">
+              <div class="step-dot">1</div>
+              <div class="step-text"><b>提案共識會議</b><span>確認整體方向，與三館對齊共識。</span></div>
+            </div>
+            <div class="step-row">
+              <div class="step-dot">2</div>
+              <div class="step-text"><b>節目名稱與視覺定案</b><span>從三個命名方向共同選定最終名稱與識別。</span></div>
+            </div>
+            <div class="step-row">
+              <div class="step-dot">3</div>
+              <div class="step-text"><b>EP1 腳本與訪綱共創</b><span>從「為什麼開這個節目」出發，共同定調第一集要對聽眾說的話。</span></div>
+            </div>
+            <div class="step-row">
+              <div class="step-dot">4</div>
+              <div class="step-text"><b>試錄與試聽驗證</b><span>確認節奏、聲音表現與品牌調性是否吻合。</span></div>
+            </div>
+            <div class="step-row">
+              <div class="step-dot">5</div>
+              <div class="step-text"><b>排定六集製作時程</b><span>雙週更新節奏正式啟動，展開先導季製作。</span></div>
+            </div>
+          </div>
+          <div style="margin-top:20px;display:flex;align-items:center;gap:16px;">
+            <a class="link-btn" href="https://erp.sdh-corp.com/kol-catalog" target="_blank" rel="noopener">先看看可合作的 KOL 名單<span class="arw">→</span></a>
+            <div>
+              <div class="link-note">不需等到正式簽約，隨時可先瀏覽我們的合作資源。</div>
+              <div class="link-url">erp.sdh-corp.com/kol-catalog</div>
+            </div>
+          </div>
+          <div class="confirm-box">
+            <b>待確認事項：</b>① Annie 於三館的正式職稱與掛名方式　② 三館品牌識別與授權照片／影像素材　③ 正式合作範圍、製作週期與報價細節　④ 本簡報人物與空間視覺為概念示意，正式版本以實際拍攝或授權素材替換。
+          </div>
+        </div>
+        <div class="page-index"><b>15</b> / 15</div>
+      </section>
+
+    </div>
+  </div>
+</div>
+
+<div class="nav" id="nav">
+  <button class="nav-btn" id="prevBtn" aria-label="上一頁">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+  </button>
+  <div class="nav-counter"><b id="curNum">01</b> / 15&nbsp;&nbsp;<span id="curName" style="opacity:.75;"></span></div>
+  <button class="nav-btn" id="nextBtn" aria-label="下一頁">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg>
+  </button>
+</div>
+
+<script>
+(function(){
+  var slides = Array.prototype.slice.call(document.querySelectorAll('.slide'));
+  var total = slides.length;
+  var idx = 0;
+  var curNum = document.getElementById('curNum');
+  var curName = document.getElementById('curName');
+  var stageWrap = document.getElementById('stageWrap');
+  var viewport = document.getElementById('viewport');
+
+  function pad2(n){ return String(n).padStart(2,'0'); }
+
+  function render(){
+    slides.forEach(function(s, i){
+      s.classList.toggle('is-active', i === idx);
+    });
+    curNum.textContent = pad2(idx+1);
+    curName.textContent = slides[idx].getAttribute('data-title') || '';
+  }
+  function go(delta){
+    idx = (idx + delta + total) % total;
+    render();
+  }
+
+  document.getElementById('prevBtn').addEventListener('click', function(){ go(-1); });
+  document.getElementById('nextBtn').addEventListener('click', function(){ go(1); });
+
+  window.addEventListener('keydown', function(e){
+    if(e.key === 'ArrowRight' || e.key === 'PageDown'){ go(1); }
+    else if(e.key === 'ArrowLeft' || e.key === 'PageUp'){ go(-1); }
+    else if(e.key === 'Home'){ idx = 0; render(); }
+    else if(e.key === 'End'){ idx = total-1; render(); }
+  });
+
+  var mobileQ = window.matchMedia('(max-width: 900px)');
+  function scaleStage(){
+    if (mobileQ.matches){            /* 手機為單欄垂直捲動，不做等比縮放 */
+      stageWrap.style.transform = '';
+      return;
+    }
+    var vw = viewport.clientWidth - 36;
+    var vh = viewport.clientHeight - 92; /* reserve room so the fixed nav never overlaps the stage */
+    var scale = Math.min(vw/1280, vh/720, 1);
+    stageWrap.style.transform = 'scale(' + scale + ')';
+  }
+  window.addEventListener('resize', scaleStage);
+  scaleStage();
+  render();
+})();
+</script>
+</body>
+</html>
