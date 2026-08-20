@@ -812,6 +812,15 @@
     color:var(--gold); font-weight:700;
   }
   .add-box li b{ color:var(--night); }
+
+  /* 案例卡分類標籤：區分「本人主持」與「品牌經營」 */
+  .boss-head .bh-flag{
+    position:absolute; top:10px; right:11px; z-index:3;
+    font-family:'Noto Sans TC',sans-serif; font-size:8.5px; letter-spacing:.04em;
+    color:var(--ivory); border:1px solid rgba(244,240,232,.45); padding:3px 6px;
+    white-space:nowrap;
+  }
+  .boss-head .bh-flag.brand{ border-color:rgba(180,154,104,.85); color:var(--gold); }
 </style>
 </head>
 <body>
@@ -964,31 +973,31 @@
         <div class="pad" style="padding:52px 72px;">
           <span class="eyebrow">05 — Proven Model</span>
           <h1 class="title" style="font-size:36px;">老闆親自開口，是已經被驗證的模式</h1>
-          <p class="thesis" style="font-size:17px;max-width:780px;">在國際上，創辦人主持的節目能長成一線媒體；台灣各產業的經營者也早已開口。但在台灣旅宿業，「經營者本人坐到麥克風前」這個位置，還空著。</p>
+          <p class="thesis" style="font-size:17px;max-width:800px;">創辦人親自主持能把節目長成一線媒體；品牌派出內部關鍵人物主持，也能撐起長期內容 IP。兩條路國際上都已驗證——但在台灣旅宿業，<b>經營者本人坐到麥克風前</b>這個位置，還空著。</p>
           <div class="boss-grid">
             <div class="boss-card">
-              <div class="boss-head tex-a"><div class="bh-name">The Diary<br>Of A CEO</div></div>
+              <div class="boss-head tex-a"><span class="bh-flag">創辦人本人主持</span><div class="bh-name">The Diary<br>Of A CEO</div></div>
               <div class="boss-body">
                 <div class="bb-who">Steven Bartlett<br>Social Chain 創辦人</div>
                 <p>2024 年跨平台突破 10 億次串流，並獲 Apple 認證為英國下載量最高的 Podcast。創辦人 IP 長成一線媒體的代表。</p>
               </div>
             </div>
             <div class="boss-card">
-              <div class="boss-head tex-b"><div class="bh-name">Soho House<br>品牌節目群</div></div>
+              <div class="boss-head tex-b"><span class="bh-flag brand">品牌經營案例</span><div class="bh-name">Soho House<br>品牌節目群</div></div>
               <div class="boss-body">
                 <div class="bb-who">Kate Bryan<br>Soho House 全球典藏總監</div>
-                <p>國際款待品牌自製多檔節目，其中《How To Be An Artist》由品牌高管親自主持——款待品牌做內容 IP 的標竿。</p>
+                <p>國際款待品牌自製多檔節目。《How To Be An Artist》主持人為品牌全球典藏總監，<b>並非創辦人或業主</b>——這證明的是「品牌可由內部關鍵專業人物主持節目」，是款待品牌經營內容 IP 的成功案例。</p>
               </div>
             </div>
             <div class="boss-card">
-              <div class="boss-head tex-c"><div class="bh-name">經營男不難</div></div>
+              <div class="boss-head tex-c"><span class="bh-flag">經營者本人主持</span><div class="bh-name">經營男不難</div></div>
               <div class="boss-body">
                 <div class="bb-who">陳宗賢教授<br>曾任 71 家企業總經理及執行長</div>
                 <p>已累積 222 集、每月兩更。台灣「經營者用長期節目建立專業權威」最具規模的實例。</p>
               </div>
             </div>
             <div class="boss-card">
-              <div class="boss-head tex-d"><div class="bh-name">說說餐飲</div></div>
+              <div class="boss-head tex-d"><span class="bh-flag">主理人本人主持</span><div class="bh-name">說說餐飲</div></div>
               <div class="boss-body">
                 <div class="bb-who">James<br>餐飲創業平台「開吧」主理人</div>
                 <p>主理人親自主持，談自身創業心得並邀請餐廳老闆分享——同業經營者互訪，把節目做成產業聚點。</p>
@@ -1002,7 +1011,7 @@
             <span class="st-src">創市際市場研究顧問<br>2025 年 10 月調查，n=1,291</span>
           </div>
           <div class="insight-box" style="margin-top:14px;margin-right:96px;padding:15px 24px;font-size:12.5px;">
-            <b>這對三館的意義：</b>台灣聽眾最常收聽的兩個主場——<b>財經商業</b>與<b>旅遊資訊</b>——正好交會在「旅宿經營者」這個身分上。Annie 站上這個位置，不是跟風，是先行。
+            <b>這對三館的意義：</b>台灣聽眾最常收聽的兩個主場——<b>財經商業</b>與<b>旅遊資訊</b>——正好交會在「旅宿經營者」這個身分上。三館既可走 Soho House 的品牌經營路線，也可由 Annie 本人具名主持；後者辨識度更高，且目前無人佔位。
           </div>
         </div>
         <div class="page-index"><b>06</b> / 16</div>
